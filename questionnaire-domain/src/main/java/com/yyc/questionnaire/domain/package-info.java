@@ -1,7 +1,6 @@
 /**
- *
- * This is the core Domain business which should be pure and clean, have no dependency over other layers.
- *
+ * This is domain module, the core business logic is implemented here.
+ * 
  * @author fulan.zjf
  */
 package com.yyc.questionnaire.domain;
