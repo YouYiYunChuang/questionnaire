@@ -19,8 +19,8 @@
     <modules>
         <module>questionnaire-app</module>
         <module>questionnaire-client</module>
-        <module>questionnaire-controller</module>
-        <module>questionnaire-domain</module>
+        <module>questionnaire-com.yyc.questionnaire.controller</module>
+        <module>questionnaire-com.yyc.questionnaire.domain</module>
         <module>questionnaire-infrastructure</module>
         <module>start</module>
     </modules>
@@ -42,7 +42,7 @@
             </dependency>
             <dependency>
                 <groupId>com.aliyun</groupId>
-                <artifactId>cola-common</artifactId>
+                <artifactId>cola-com.yyc.questionnaire.common</artifactId>
                 <version>3.0.0</version>
                 <type>jar</type>
             </dependency>

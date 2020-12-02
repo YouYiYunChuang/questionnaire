@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.yyc.questionnaire.gatewayimpl.database.MetricMapper">
+<mapper namespace="com.yyc.questionnaire.com.yyc.questionnaire.gatewayimpl.database.MetricMapper">
     <sql id="ALL_COLUMNS">
         id,
         user_id,
@@ -22,7 +22,7 @@
         FROM metric
     </sql>
 
-    <insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="com.yyc.questionnaire.gatewayimpl.database.dataobject.MetricDO">
+    <insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="com.yyc.questionnaire.com.yyc.questionnaire.gatewayimpl.database.dataobject.MetricDO">
         INSERT INTO metric(
             <include refid="ALL_COLUMNS"/>
         ) VALUES (
@@ -43,22 +43,22 @@
         UPDATE metric SET is_deleted='y', modifier = #{modifier} WHERE id = #{id} and IS_DELETED = 'n'
     </delete>
 
-    <select id="listByUserId" resultType="com.yyc.questionnaire.gatewayimpl.database.dataobject.MetricDO" parameterType="map">
+    <select id="listByUserId" resultType="com.yyc.questionnaire.com.yyc.questionnaire.gatewayimpl.database.dataobject.MetricDO" parameterType="map">
         <include refid="COMMON_SELECT"/>
         WHERE user_id = #{userId} and IS_DELETED = 'n'
     </select>
 
-    <select id="listByMainMetric" resultType="com.yyc.questionnaire.gatewayimpl.database.dataobject.MetricDO" parameterType="map">
+    <select id="listByMainMetric" resultType="com.yyc.questionnaire.com.yyc.questionnaire.gatewayimpl.database.dataobject.MetricDO" parameterType="map">
         <include refid="COMMON_SELECT"/>
         WHERE user_id = #{userId} and main_metric= #{mainMetric} and IS_DELETED = 'n'
     </select>
 
-    <select id="listBySubMetric" resultType="com.yyc.questionnaire.gatewayimpl.database.dataobject.MetricDO" parameterType="map">
+    <select id="listBySubMetric" resultType="com.yyc.questionnaire.com.yyc.questionnaire.gatewayimpl.database.dataobject.MetricDO" parameterType="map">
         <include refid="COMMON_SELECT"/>
         WHERE user_id = #{userId} and sub_metric= #{subMetric} and IS_DELETED = 'n'
     </select>
 
-    <select id="getById" resultType="com.yyc.questionnaire.gatewayimpl.database.dataobject.MetricDO" parameterType="map">
+    <select id="getById" resultType="com.yyc.questionnaire.com.yyc.questionnaire.gatewayimpl.database.dataobject.MetricDO" parameterType="map">
         <include refid="COMMON_SELECT"/>
         WHERE id = #{id} and IS_DELETED = 'n'
     </select>

@@ -7,8 +7,8 @@
         <version>0.0.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>questionnaire-domain</artifactId>
-	<name>QuestionnaireApplication-domain</name>
+	<artifactId>questionnaire-com.yyc.questionnaire.domain</artifactId>
+	<name>QuestionnaireApplication-com.yyc.questionnaire.domain</name>
 	<dependencies>
 		<!-- COLA Framework -->
 		<dependency>

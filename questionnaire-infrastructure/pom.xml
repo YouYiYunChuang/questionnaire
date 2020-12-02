@@ -13,7 +13,7 @@
 		<!--DIP here, Infrastructure depends on Domain-->
 		<dependency>
 			<groupId>com.yyc</groupId>
-			<artifactId>questionnaire-domain</artifactId>
+			<artifactId>questionnaire-com.yyc.questionnaire.domain</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>

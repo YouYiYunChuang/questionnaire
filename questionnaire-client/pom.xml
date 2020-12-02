@@ -12,7 +12,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.aliyun</groupId>
-			<artifactId>cola-common</artifactId>
+			<artifactId>cola-com.yyc.questionnaire.common</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
