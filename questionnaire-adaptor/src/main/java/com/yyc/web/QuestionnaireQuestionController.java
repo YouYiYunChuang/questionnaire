@@ -24,9 +24,9 @@ public class QuestionnaireQuestionController {
      *
      * @return
      */
-    @GetMapping
+    @GetMapping("type")
     public MultiResponse<Map<String, String>> listQuestionnaireQuestionType() {
-        return questionnaireQuestionServiceI.listQuestionnaireQuestionType();
+        return MultiResponse.ofWithoutTotal(questionnaireQuestionServiceI.listQuestionnaireQuestionType());
     }
 
 }

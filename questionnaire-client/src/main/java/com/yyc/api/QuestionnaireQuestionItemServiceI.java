@@ -8,13 +8,12 @@ import java.util.Map;
 /**
  * @author yuchengyao
  */
-public interface QuestionnaireQuestionServiceI {
+public interface QuestionnaireQuestionItemServiceI {
 
     /**
-     * 问卷问题类型
+     * 问卷问题细项类型列表
      *
      * @return
      */
-    List<Map<String, String>> listQuestionnaireQuestionType();
-
+    List<Map<String, String>> listQuestionnaireQuestionItemType();
 }

@@ -1,16 +1,18 @@
 package com.yyc.question.executor;
 
-import com.alibaba.cola.dto.MultiResponse;
 import com.yyc.domain.questionnaire.status.QuestionnaireQuestionType;
+import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Map;
 
 /**
  * @author yuchengyao
  */
+@Component
 public class QuestionnaireQuestionTypeListExe {
 
-    public MultiResponse<Map<String, String>> listQuestionnaireQuestionType() {
-        return MultiResponse.ofWithoutTotal(QuestionnaireQuestionType.getQuestionnaireQuestionTypeList());
+    public List<Map<String, String>> listQuestionnaireQuestionType() {
+        return QuestionnaireQuestionType.getQuestionnaireQuestionTypeList();
     }
 }
