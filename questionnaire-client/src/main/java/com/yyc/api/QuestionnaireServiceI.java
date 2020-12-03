@@ -2,7 +2,7 @@ package com.yyc.api;
 
 import com.alibaba.cola.dto.MultiResponse;
 import com.yyc.dto.QuestionnaireInsertCmd;
-import com.yyc.dto.QuestionnaireInsertQry;
+import com.yyc.dto.QuestionnaireQry;
 import com.yyc.dto.QuestionnaireReportCmd;
 import com.yyc.dto.data.QuestionnaireDTO;
 
@@ -24,7 +24,7 @@ public interface QuestionnaireServiceI {
      * @param questionnaireInsertQry
      * @return
      */
-    MultiResponse<QuestionnaireDTO> listQuestionnaires(QuestionnaireInsertQry questionnaireInsertQry);
+    MultiResponse<QuestionnaireDTO> listQuestionnaires(QuestionnaireQry questionnaireInsertQry);
 
     /**
      * 问卷详情

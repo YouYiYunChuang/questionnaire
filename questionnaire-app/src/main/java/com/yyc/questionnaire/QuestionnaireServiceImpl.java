@@ -3,7 +3,7 @@ package com.yyc.questionnaire;
 import com.alibaba.cola.dto.MultiResponse;
 import com.yyc.api.QuestionnaireServiceI;
 import com.yyc.dto.QuestionnaireInsertCmd;
-import com.yyc.dto.QuestionnaireInsertQry;
+import com.yyc.dto.QuestionnaireQry;
 import com.yyc.dto.QuestionnaireReportCmd;
 import com.yyc.dto.data.QuestionnaireDTO;
 import com.yyc.questionnaire.executor.*;
@@ -37,7 +37,7 @@ public class QuestionnaireServiceImpl implements QuestionnaireServiceI {
     }
 
     @Override
-    public MultiResponse<QuestionnaireDTO> listQuestionnaires(@NonNull QuestionnaireInsertQry questionnaireInsertQry) {
+    public MultiResponse<QuestionnaireDTO> listQuestionnaires(@NonNull QuestionnaireQry questionnaireInsertQry) {
         return questionnairesListExe.listQuestionnaires(questionnaireInsertQry);
     }
 

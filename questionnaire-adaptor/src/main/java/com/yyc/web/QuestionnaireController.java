@@ -5,7 +5,7 @@ import com.alibaba.cola.dto.Response;
 import com.alibaba.cola.dto.SingleResponse;
 import com.yyc.api.QuestionnaireServiceI;
 import com.yyc.dto.QuestionnaireInsertCmd;
-import com.yyc.dto.QuestionnaireInsertQry;
+import com.yyc.dto.QuestionnaireQry;
 import com.yyc.dto.QuestionnaireReportCmd;
 import com.yyc.dto.data.QuestionnaireDTO;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +41,7 @@ public class QuestionnaireController {
      * @return
      */
     @GetMapping
-    public MultiResponse<QuestionnaireDTO> listQuestionnaires(@ModelAttribute QuestionnaireInsertQry questionnaireInsertQry) {
+    public MultiResponse<QuestionnaireDTO> listQuestionnaires(@ModelAttribute QuestionnaireQry questionnaireInsertQry) {
         return questionnaireServiceI.listQuestionnaires(questionnaireInsertQry);
     }
 
