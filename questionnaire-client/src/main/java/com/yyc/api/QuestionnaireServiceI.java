@@ -1,0 +1,50 @@
+package com.yyc.api;
+
+import com.alibaba.cola.dto.MultiResponse;
+import com.yyc.dto.QuestionnaireInsertCmd;
+import com.yyc.dto.QuestionnaireInsertQry;
+import com.yyc.dto.QuestionnaireReportCmd;
+import com.yyc.dto.data.QuestionnaireDTO;
+
+/**
+ * @author yuchengyao
+ */
+public interface QuestionnaireServiceI {
+
+    /**
+     * 问卷调查新增（问题新增、问题细项新增）接口
+     *
+     * @param questionnaireInsertCmd
+     */
+    void insertQuestionnaire(QuestionnaireInsertCmd questionnaireInsertCmd);
+
+    /**
+     * 问卷列表
+     *
+     * @param questionnaireInsertQry
+     * @return
+     */
+    MultiResponse<QuestionnaireDTO> listQuestionnaires(QuestionnaireInsertQry questionnaireInsertQry);
+
+    /**
+     * 问卷详情
+     *
+     * @param id
+     * @return
+     */
+    QuestionnaireDTO getQuestionnaire(String id);
+
+    /**
+     * 问卷停用
+     *
+     * @param id
+     */
+    void deactivateQuestionnaire(String id);
+
+    /**
+     * 问卷填报
+     *
+     * @param questionnaireReportCmd
+     */
+    void reportQuestionnaire(QuestionnaireReportCmd questionnaireReportCmd);
+}
