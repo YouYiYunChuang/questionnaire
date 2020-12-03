@@ -5,9 +5,9 @@ import lombok.Data;
 
 /**
  * 问卷问题回答表
+ * @author yuchengyao
  */
 @Data
-
 @Builder
 public class QuestionnaireQuestionReplication {
 

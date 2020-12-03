@@ -13,25 +13,25 @@ public class QuestionnaireQuestion {
     /**
      * 问卷code
      */
-    private String questionnaire_code;
+    private String questionnaireCode;
 
     /**
      * 问题code
      */
-    private String questionnaire_question_code;
+    private String questionnaireQuestionCode;
 
     /**
      * 问题序号
      */
-    private Integer questionnaire_question_sort;
+    private Integer questionnaireQuestionSort;
 
     /**
      * 问题名称
      */
-    private String questionnaire_question_title;
+    private String questionnaireQuestionTitle;
 
     /**
      * 问题内容，填空题，问题项框架
      */
-    private String questionnaire_question_content;
+    private String questionnaireQuestionContent;
 }

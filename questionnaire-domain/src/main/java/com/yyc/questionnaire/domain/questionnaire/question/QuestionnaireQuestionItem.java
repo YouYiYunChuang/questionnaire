@@ -5,6 +5,7 @@ import lombok.Data;
 
 /**
  * 问卷问题细项
+ * @author yuchengyao
  */
 @Data
 @Builder
@@ -28,6 +29,6 @@ public class QuestionnaireQuestionItem {
     /**
      * 细项内容
      */
-    private String questionnaireQuestionTtemContent;
+    private String questionnaireQuestionItemContent;
 
 }
