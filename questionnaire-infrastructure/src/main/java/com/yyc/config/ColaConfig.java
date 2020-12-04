@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * Configuration for COLA framework
+ * @author yuchengyao
  */
 @Configuration
 public class ColaConfig {

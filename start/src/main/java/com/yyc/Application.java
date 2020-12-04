@@ -12,7 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  * @author Frank Zhang
  */
-@SpringBootApplication(scanBasePackages = {"com.yyc.questionnaire","com.alibaba.cola"})
+@SpringBootApplication(scanBasePackages = {"com.yyc.config","com.alibaba.cola"})
 @MapperScan("com.yyc.questionnaire.repository")
 public class Application {
 

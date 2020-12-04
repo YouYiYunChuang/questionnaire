@@ -8,12 +8,16 @@ import com.yyc.dto.QuestionnaireReportCmd;
 import com.yyc.dto.data.QuestionnaireDTO;
 import com.yyc.questionnaire.executor.*;
 import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
 /**
  * @author yuchengyao
  */
+@Slf4j
+@Service
 public class QuestionnaireServiceImpl implements QuestionnaireServiceI {
 
     @Resource
