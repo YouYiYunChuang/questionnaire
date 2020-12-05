@@ -165,11 +165,13 @@
             </plugins>
         </pluginManagement>
     </build>
-<modules>  <module>questionnaire-client</module>
-    <module>questionnaire-adaptor</module>
-    <module>questionnaire-app</module>
-    <module>questionnaire-domain</module>
-    <module>questionnaire-infrastructure</module>
-    <module>start</module>
-  </modules>
+
+    <modules>
+        <module>questionnaire-client</module>
+        <module>questionnaire-adaptor</module>
+        <module>questionnaire-app</module>
+        <module>questionnaire-domain</module>
+        <module>questionnaire-infrastructure</module>
+        <module>start</module>
+    </modules>
 </project>
