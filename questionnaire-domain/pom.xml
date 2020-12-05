@@ -28,15 +28,15 @@
 	</dependencies>
 
 	<build>
-			<pluginManagement>
-					<plugins>
-							<plugin>
-								<artifactId>maven-deploy-plugin</artifactId>
-								<configuration>
-									<skip>true</skip>
-								</configuration>
-							</plugin>
-					</plugins>
-			</pluginManagement>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<configuration>
+						<skip>true</skip>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 </project>
