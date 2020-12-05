@@ -1,6 +1,6 @@
 package com.yyc.replication;
 
-import com.yyc.domain.questionnaire.gateway.QuestionnaireQuestionReplicationGateway;
+import com.yyc.domain.gateway.QuestionnaireQuestionReplicationGateway;
 
 /**
  * @author yuchengyao

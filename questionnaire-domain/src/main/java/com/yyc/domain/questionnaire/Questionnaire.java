@@ -1,4 +1,4 @@
-package com.yyc.domain.questionnaire.questionnaire;
+package com.yyc.domain.questionnaire;
 
 import lombok.Builder;
 import lombok.Data;

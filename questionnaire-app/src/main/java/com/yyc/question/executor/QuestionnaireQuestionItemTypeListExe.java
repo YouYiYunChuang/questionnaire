@@ -1,6 +1,6 @@
 package com.yyc.question.executor;
 
-import com.yyc.domain.questionnaire.status.QuestionnaireQuestionItemType;
+import com.yyc.domain.status.QuestionnaireQuestionItemType;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

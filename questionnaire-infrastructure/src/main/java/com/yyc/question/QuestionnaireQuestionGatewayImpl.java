@@ -1,6 +1,6 @@
 package com.yyc.question;
 
-import com.yyc.domain.questionnaire.gateway.QuestionnaireQuestionGateway;
+import com.yyc.domain.gateway.QuestionnaireQuestionGateway;
 
 /**
  * @author yuchengyao

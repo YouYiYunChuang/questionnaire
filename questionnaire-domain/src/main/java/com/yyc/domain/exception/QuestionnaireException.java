@@ -1,4 +1,4 @@
-package com.yyc.domain.questionnaire.exception;
+package com.yyc.domain.exception;
 
 import com.alibaba.cola.exception.BaseException;
 import com.alibaba.cola.exception.ErrorCodeI;

@@ -1,4 +1,4 @@
-package com.yyc.domain.questionnaire.gateway;
+package com.yyc.domain.gateway;
 
 /**
  * @author yuchengyao

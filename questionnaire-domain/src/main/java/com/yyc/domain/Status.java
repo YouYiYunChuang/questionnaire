@@ -1,4 +1,4 @@
-package com.yyc.domain.questionnaire;
+package com.yyc.domain;
 
 /**
  * 状态接口
