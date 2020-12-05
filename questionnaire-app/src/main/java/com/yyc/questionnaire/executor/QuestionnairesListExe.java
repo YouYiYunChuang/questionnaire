@@ -20,9 +20,7 @@ public class QuestionnairesListExe {
     private QuestionnaireGateway questionnaireGateway;
 
     public MultiResponse<QuestionnaireDTO> listQuestionnaires(QuestionnaireQry questionnaireInsertQry) {
-        //  TODO:
-
-        questionnaireGateway.getQuestionnaire(questionnaireInsertQry);
-        return MultiResponse.buildSuccess();
+        
+        return questionnaireGateway.listQuestionnaires(questionnaireInsertQry);
     }
 }
