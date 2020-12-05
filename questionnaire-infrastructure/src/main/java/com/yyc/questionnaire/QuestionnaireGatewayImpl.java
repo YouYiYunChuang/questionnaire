@@ -1,5 +1,6 @@
 package com.yyc.questionnaire;
 
+import com.alibaba.cola.dto.MultiResponse;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.yyc.domain.gateway.QuestionnaireGateway;
@@ -36,6 +37,11 @@ public class QuestionnaireGatewayImpl implements QuestionnaireGateway {
         BeanUtils.copyProperties(questionnaireDOS.get(0), questionnaireDTO);
         
         return questionnaireDTO;
+    }
+
+    @Override
+    public MultiResponse<QuestionnaireDTO> listQuestionnaires(QuestionnaireQry questionnaireQry) {
+        return null;
     }
 
     private void checkReturn(List<QuestionnaireDO> questionnaireDOS) {
