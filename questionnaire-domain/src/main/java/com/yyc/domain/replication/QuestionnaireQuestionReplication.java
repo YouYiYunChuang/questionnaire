@@ -5,6 +5,7 @@ import lombok.Data;
 
 /**
  * 问卷问题回答表
+ *
  * @author yuchengyao
  */
 @Data
@@ -16,12 +17,16 @@ public class QuestionnaireQuestionReplication {
      */
     private String questionnaireCode;
 
-
     /**
      * 回答内容
      * json格式：{
-     *      问题key：问题答案1，问题答案2
+     * 问题key：问题答案1，问题答案2
      * }
      */
     private String questionnaireQuestionReplicationContent;
+
+    /**
+     * 上报人
+     */
+    private String reportId;
 }

@@ -22,9 +22,20 @@ import lombok.Data;
 public class QuestionnaireQuestionReplicationDO extends BizDO {
 
     /**
+     * 问卷code
+     */
+    @Column(name = "questionnaire_code", type = MySqlTypeConstant.VARCHAR, comment = "回答内容")
+    @TableId(value = "questionnaire_code", type = IdType.ASSIGN_UUID)
+    private String questionnaireCode;
+
+    /**
      * 回答内容
      */
     @Column(name = "questionnaire_question_replication_content", type = MySqlTypeConstant.VARCHAR, comment = "回答内容")
     @TableId(value = "questionnaire_question_replication_content", type = IdType.ASSIGN_UUID)
-    private String questionnaireQuestionReplicationContent;
+    private String questionnaireReplicationContent;
+
+    @Column(name = "report_id", type = MySqlTypeConstant.VARCHAR, comment = "回答内容")
+    @TableId(value = "report_id", type = IdType.ASSIGN_UUID)
+    private String reportId;
 }

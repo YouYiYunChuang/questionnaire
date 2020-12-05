@@ -37,7 +37,7 @@ public class QuestionnaireServiceImpl implements QuestionnaireServiceI {
 
     @Override
     public void insertQuestionnaire(@NonNull QuestionnaireInsertCmd questionnaireInsertCmd) {
-        questionnaireInsertExe.insertQuestionnaire();
+        questionnaireInsertExe.insertQuestionnaire(questionnaireInsertCmd);
     }
 
     @Override
@@ -46,8 +46,8 @@ public class QuestionnaireServiceImpl implements QuestionnaireServiceI {
     }
 
     @Override
-    public QuestionnaireDTO getQuestionnaire(@NonNull String id) {
-        return questionnaireGetExe.getQuestionnaire(id);
+    public QuestionnaireDTO getQuestionnaire(@NonNull String questionnaireCode) {
+        return questionnaireGetExe.getQuestionnaire(questionnaireCode);
     }
 
     @Override

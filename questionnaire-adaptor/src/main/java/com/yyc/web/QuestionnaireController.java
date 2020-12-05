@@ -11,6 +11,7 @@ import com.yyc.dto.data.QuestionnaireDTO;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 /**
  * 问卷调查接口
@@ -30,7 +31,7 @@ public class QuestionnaireController {
      * @return
      */
     @PostMapping
-    public Response insertQuestionnaire(@RequestBody QuestionnaireInsertCmd questionnaireInsertCmd) {
+    public Response insertQuestionnaire(@RequestBody @Valid QuestionnaireInsertCmd questionnaireInsertCmd) {
         questionnaireServiceI.insertQuestionnaire(questionnaireInsertCmd);
         return Response.buildSuccess();
     }
@@ -48,12 +49,12 @@ public class QuestionnaireController {
     /**
      * 问卷详情（问题、问题细项）接口
      *
-     * @param id 问卷唯一标识
+     * @param questionnaireCode 问卷code
      * @return
      */
-    @GetMapping("{id}")
-    public SingleResponse<QuestionnaireDTO> getQuestionnaire(@PathVariable String id) {
-        return SingleResponse.of(questionnaireServiceI.getQuestionnaire(id));
+    @GetMapping("{questionnaireCode}")
+    public SingleResponse<QuestionnaireDTO> getQuestionnaire(@PathVariable String questionnaireCode) {
+        return SingleResponse.of(questionnaireServiceI.getQuestionnaire(questionnaireCode));
     }
 
     /**
