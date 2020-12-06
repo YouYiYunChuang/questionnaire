@@ -10,10 +10,12 @@ import com.yyc.domain.exception.QuestionnaireExceptionCode;
 import com.yyc.domain.gateway.QuestionnaireGateway;
 import com.yyc.domain.status.DataStatus;
 import com.yyc.domain.utils.CollectionCopyUtil;
+import com.yyc.dto.QuestionnaireInsertCmd;
 import com.yyc.dto.QuestionnaireQry;
 import com.yyc.dto.QuestionnaireUpdateCmd;
 import com.yyc.dto.data.QuestionnaireDTO;
 import lombok.NonNull;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -63,6 +65,18 @@ public class QuestionnaireGatewayImpl implements QuestionnaireGateway {
         questionnaireMapper.update(questionnaireDO, buildUpdateWrapper(questionnaireUpdateCmd));
     }
 
+    @Override
+    public void insert(QuestionnaireInsertCmd questionnaireInsertCmd) {
+
+        QuestionnaireDO questionnaireDO = new QuestionnaireDO();
+
+        BeanUtils.copyProperties(questionnaireInsertCmd, questionnaireDO);
+
+        questionnaireDO.setStatus(DataStatus.NEW.getCode());
+
+        questionnaireMapper.insert(questionnaireDO);
+    }
+
     private Wrapper buildUpdateWrapper(QuestionnaireUpdateCmd questionnaireUpdateCmd) {
 
         Wrapper wrapper = new QueryWrapper()
@@ -74,8 +88,8 @@ public class QuestionnaireGatewayImpl implements QuestionnaireGateway {
     private Wrapper buildQueryWrapper(@NonNull QuestionnaireQry questionnaireQry) {
 
         Wrapper wrapper = new QueryWrapper()
-                .eq(questionnaireQry.getQuestionnaireCode() != null, "questionnaire_code", questionnaireQry.getQuestionnaireCode())
-                .like(questionnaireQry.getQuestionnaireTitle() != null, "questionnaireTitle", questionnaireQry.getQuestionnaireTitle());
+                .eq(questionnaireQry.getQuestionnaireCode() != null, "questionnaire.questionnaire_code", questionnaireQry.getQuestionnaireCode())
+                .like(questionnaireQry.getQuestionnaireTitle() != null, "questionnaire.questionnaireTitle", questionnaireQry.getQuestionnaireTitle());
 
         return wrapper;
     }

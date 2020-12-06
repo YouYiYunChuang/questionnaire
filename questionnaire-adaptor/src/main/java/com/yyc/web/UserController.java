@@ -14,7 +14,7 @@ import javax.annotation.Resource;
  * @author yuchengyao
  */
 @RestController
-@RequestMapping("")
+@RequestMapping("user")
 public class UserController {
 
     @Resource
@@ -26,7 +26,7 @@ public class UserController {
      * @param code
      * @return
      */
-    @PostMapping
+    @PostMapping("login/{code}")
     public SingleResponse<TokenDTO> wechatLogin(@PathVariable("code") String code) {
 
         return SingleResponse.of(userServicesI.wechatLogin(code));

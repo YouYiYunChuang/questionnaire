@@ -9,7 +9,7 @@ import com.yyc.domain.exception.QuestionnaireExceptionCode;
 import com.yyc.domain.utils.JsonUtils;
 import com.yyc.dto.data.TokenDTO;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Aspect
-@Component
+//@Component
 public class QuestionnaireAccessAspect {
 
     @Resource
@@ -45,15 +45,15 @@ public class QuestionnaireAccessAspect {
      * 通过@Pointcut注解声明频繁使用的切点表达式
      */
     @Pointcut("execution(public * com.yyc.web.*.*(..)))")
-    public void smsContentAspect() {
+    public void questionnaireAccessAspect() {
         //  do nothing
     }
 
     /**
      * @description 在连接点执行之前执行的通知
      */
-    @Before(value = "smsContentAspect()")
-    public void doBefore(ProceedingJoinPoint point) throws NoSuchMethodException {
+    @Before(value = "questionnaireAccessAspect()")
+    public void doBefore(JoinPoint point) throws NoSuchMethodException {
 
         Access accessAnnotation = getAccessAnnotation(point);
 
@@ -79,7 +79,7 @@ public class QuestionnaireAccessAspect {
         return request.getHeader("questionnaire-access-token");
     }
 
-    private Access getAccessAnnotation(ProceedingJoinPoint point) throws NoSuchMethodException {
+    private Access getAccessAnnotation(JoinPoint point) throws NoSuchMethodException {
 
         Object target = point.getTarget();
 
@@ -95,7 +95,7 @@ public class QuestionnaireAccessAspect {
     /**
      * @description 在连接点执行之后执行的通知（返回通知和异常通知的异常）
      */
-    @After("smsContentAspect()")
+    @After("questionnaireAccessAspect()")
     public void doAfter() {
         //  清除请求权限上下文
     }

@@ -7,7 +7,6 @@ import com.gitee.sunchenbin.mybatis.actable.annotation.Table;
 import com.gitee.sunchenbin.mybatis.actable.annotation.Unique;
 import com.gitee.sunchenbin.mybatis.actable.constants.MySqlTypeConstant;
 import com.yyc.BaseDO;
-import lombok.Builder;
 import lombok.Data;
 
 /**
@@ -16,7 +15,6 @@ import lombok.Data;
  * @author yuchengyao
  */
 @Data
-@Builder
 @TableName(value = "questionnaire_question")
 @Table(name = "questionnaire_question")
 public class QuestionnaireQuestionDO extends BaseDO {

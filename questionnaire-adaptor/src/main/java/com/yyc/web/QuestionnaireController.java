@@ -37,7 +37,7 @@ public class QuestionnaireController {
     })
     @PostMapping
     public Response insertQuestionnaire(@RequestBody @Valid QuestionnaireInsertCmd questionnaireInsertCmd) {
-        questionnaireServiceI.insertQuestionnaire(questionnaireInsertCmd);
+        questionnaireServiceI.insert(questionnaireInsertCmd);
         return Response.buildSuccess();
     }
 

@@ -11,16 +11,25 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ComponentScan(value = {
-        "com.yyc.web",
+
+        "com.yyc.web",//    controller
+
+        "com.yyc.user",
         "com.yyc.question",
         "com.yyc.questionnaire",
-        "com.yyc.handler",
-        "com.yyc.replication",
-        "com.gitee.sunchenbin.mybatis.actable.manager.*",
+        "com.yyc.replication",  //  db实体
+
+        "com.yyc.aop",  //  system-aop
+        "com.yyc.handler",  //  system-handler
+        "com.gitee.sunchenbin.mybatis.actable.manager.*",   //  system-actable
+
 })
 @MapperScan(value = {
-        "com.gitee.sunchenbin.mybatis.actable.dao.*",
-        "com.yyc.questionnaire"
+        "com.gitee.sunchenbin.mybatis.actable.dao.*",   //  system-actable
+        "com.yyc.user",
+        "com.yyc.question",
+        "com.yyc.questionnaire",
+        "com.yyc.replication",  //  db实体
 })
 public class DiamondConfig {
     public final static String DummyConfig = "DummyConfig";

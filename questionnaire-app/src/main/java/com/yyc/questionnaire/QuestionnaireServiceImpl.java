@@ -10,6 +10,7 @@ import com.yyc.questionnaire.executor.*;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -36,8 +37,9 @@ public class QuestionnaireServiceImpl implements QuestionnaireServiceI {
     private QuestionnaireReportExe questionnaireReportExe;
 
     @Override
-    public void insertQuestionnaire(@NonNull QuestionnaireInsertCmd questionnaireInsertCmd) {
-        questionnaireInsertExe.insertQuestionnaire(questionnaireInsertCmd);
+    @Transactional
+    public void insert(@NonNull QuestionnaireInsertCmd questionnaireInsertCmd) {
+        questionnaireInsertExe.insert(questionnaireInsertCmd);
     }
 
     @Override

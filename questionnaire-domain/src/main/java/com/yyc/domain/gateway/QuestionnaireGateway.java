@@ -1,6 +1,7 @@
 package com.yyc.domain.gateway;
 
 import com.alibaba.cola.dto.MultiResponse;
+import com.yyc.dto.QuestionnaireInsertCmd;
 import com.yyc.dto.QuestionnaireQry;
 import com.yyc.dto.data.QuestionnaireDTO;
 
@@ -31,4 +32,11 @@ public interface QuestionnaireGateway {
      * @param questionnaireCode
      */
     void deactivateQuestionnaire(String questionnaireCode);
+
+    /**
+     * 新增问卷
+     *
+     * @param questionnaireInsertCmd
+     */
+    void insert(QuestionnaireInsertCmd questionnaireInsertCmd);
 }

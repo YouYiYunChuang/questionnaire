@@ -16,7 +16,7 @@ public interface QuestionnaireServiceI {
      *
      * @param questionnaireInsertCmd
      */
-    void insertQuestionnaire(QuestionnaireInsertCmd questionnaireInsertCmd);
+    void insert(QuestionnaireInsertCmd questionnaireInsertCmd);
 
     /**
      * 问卷列表

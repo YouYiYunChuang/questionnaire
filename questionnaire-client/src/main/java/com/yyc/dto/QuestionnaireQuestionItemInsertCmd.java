@@ -1,10 +1,13 @@
 package com.yyc.dto;
 
+import lombok.Data;
+
 import javax.validation.constraints.NotNull;
 
 /**
  * @author yuchengyao
  */
+@Data
 public class QuestionnaireQuestionItemInsertCmd {
 
     /**

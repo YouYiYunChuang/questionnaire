@@ -1,13 +1,11 @@
 package com.yyc.question;
 
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.gitee.sunchenbin.mybatis.actable.annotation.Column;
 import com.gitee.sunchenbin.mybatis.actable.annotation.Table;
 import com.gitee.sunchenbin.mybatis.actable.constants.MySqlTypeConstant;
 import com.yyc.BaseDO;
-import lombok.Builder;
 import lombok.Data;
 
 /**
@@ -16,7 +14,6 @@ import lombok.Data;
  * @author yuchengyao
  */
 @Data
-@Builder
 @TableName(value = "questionnaire_question_item")
 @Table(name = "questionnaire_question_item")
 public class QuestionnaireQuestionItemDO extends BaseDO {

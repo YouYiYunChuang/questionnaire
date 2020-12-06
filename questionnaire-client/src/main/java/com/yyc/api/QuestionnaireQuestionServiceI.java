@@ -1,6 +1,6 @@
 package com.yyc.api;
 
-import com.alibaba.cola.dto.MultiResponse;
+import com.yyc.dto.QuestionnaireInsertCmd;
 
 import java.util.List;
 import java.util.Map;
@@ -16,5 +16,12 @@ public interface QuestionnaireQuestionServiceI {
      * @return
      */
     List<Map<String, String>> listQuestionnaireQuestionType();
+
+    /**
+     * 根据问卷信息新增问题信息
+     *
+     * @param questionnaireInsertCmd 问卷信息
+     */
+    void batchInsert(QuestionnaireInsertCmd questionnaireInsertCmd);
 
 }
