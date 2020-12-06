@@ -2,6 +2,7 @@ package com.yyc.question;
 
 import com.yyc.api.QuestionnaireQuestionItemServiceI;
 import com.yyc.domain.gateway.QuestionnaireQuestionItemGateway;
+import com.yyc.domain.utils.CodeBuildUtils;
 import com.yyc.dto.QuestionnaireQuestionInsertCmd;
 import com.yyc.dto.QuestionnaireQuestionItemInsertCmd;
 import com.yyc.question.executor.QuestionnaireQuestionItemTypeListExe;
@@ -44,6 +45,9 @@ public class QuestionnaireQuestionItemServiceImpl implements QuestionnaireQuesti
 
                     //  问题细项的问题code
                     value.setQuestionnaireQuestionCode(questionnaireQuestionInsertCmd.getQuestionnaireQuestionCode());
+
+                    //  问题细项的code
+                    value.setQuestionnaireQuestionItemCode(CodeBuildUtils.getCode());
                     insert(value);
                 }
         );

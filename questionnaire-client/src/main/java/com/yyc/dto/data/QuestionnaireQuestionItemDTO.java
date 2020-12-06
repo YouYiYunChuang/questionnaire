@@ -13,6 +13,11 @@ public class QuestionnaireQuestionItemDTO {
     private String questionnaireQuestionCode;
 
     /**
+     * 问题细项code
+     */
+    private String questionnaireQuestionItemCode;
+    
+    /**
      * 细项排序
      */
     private Integer questionnaireQuestionItemSort;

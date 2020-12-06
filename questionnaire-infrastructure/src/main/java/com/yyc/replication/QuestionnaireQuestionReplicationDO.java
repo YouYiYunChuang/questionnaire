@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.gitee.sunchenbin.mybatis.actable.annotation.Column;
 import com.gitee.sunchenbin.mybatis.actable.annotation.Table;
+import com.gitee.sunchenbin.mybatis.actable.annotation.Unique;
 import com.gitee.sunchenbin.mybatis.actable.constants.MySqlTypeConstant;
 import com.yyc.BizDO;
 import lombok.Data;
@@ -21,6 +22,10 @@ public class QuestionnaireQuestionReplicationDO extends BizDO {
     /**
      * 问卷code
      */
+    @Unique(columns = {
+            "questionnaire_code",
+            "open_id"
+    })
     @Column(name = "questionnaire_code", type = MySqlTypeConstant.VARCHAR, comment = "问卷code")
     @TableField(value = "questionnaire_code")
     private String questionnaireCode;

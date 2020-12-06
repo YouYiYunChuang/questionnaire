@@ -16,6 +16,11 @@ public class QuestionnaireQuestionItemInsertCmd {
     private String questionnaireQuestionCode;
 
     /**
+     * 问题细项code
+     */
+    private String questionnaireQuestionItemCode;
+    
+    /**
      * 细项排序
      */
     @NotNull(message = "细项排序不可为空")

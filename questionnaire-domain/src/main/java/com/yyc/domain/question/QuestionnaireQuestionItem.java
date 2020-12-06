@@ -5,6 +5,7 @@ import lombok.Data;
 
 /**
  * 问卷问题细项
+ *
  * @author yuchengyao
  */
 @Data
@@ -15,6 +16,11 @@ public class QuestionnaireQuestionItem {
      * 问题code
      */
     private String questionnaireQuestionCode;
+
+    /**
+     * 问题细项code
+     */
+    private String questionnaireQuestionItemCode;
 
     /**
      * 细项排序
