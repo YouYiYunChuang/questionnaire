@@ -1,5 +1,6 @@
 package com.yyc.user.executor;
 
+import com.yyc.access.Role;
 import com.yyc.config.RedisUtils;
 import com.yyc.config.WechatConfig;
 import com.yyc.domain.exception.QuestionnaireException;
@@ -47,6 +48,9 @@ public class UserLoginWechatExe {
         //  有用户
         TokenDTO token = TokenDTO.random();
         token.setOpenId(openId);
+
+        //  角色
+        token.setRoleCode(new String[]{Role.GENERAL_USER.name()});
 
         //  token 缓存60分钟
         redisUtils.setListExpire(token.getToken(), JsonUtils.toString(token), 60L, TimeUnit.MINUTES);

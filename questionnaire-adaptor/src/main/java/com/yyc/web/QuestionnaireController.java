@@ -3,6 +3,8 @@ package com.yyc.web;
 import com.alibaba.cola.dto.MultiResponse;
 import com.alibaba.cola.dto.Response;
 import com.alibaba.cola.dto.SingleResponse;
+import com.yyc.access.Access;
+import com.yyc.access.Role;
 import com.yyc.api.QuestionnaireServiceI;
 import com.yyc.dto.QuestionnaireInsertCmd;
 import com.yyc.dto.QuestionnaireQry;
@@ -30,6 +32,9 @@ public class QuestionnaireController {
      *
      * @return
      */
+    @Access(roles = {
+            Role.ADMIN
+    })
     @PostMapping
     public Response insertQuestionnaire(@RequestBody @Valid QuestionnaireInsertCmd questionnaireInsertCmd) {
         questionnaireServiceI.insertQuestionnaire(questionnaireInsertCmd);
@@ -41,6 +46,10 @@ public class QuestionnaireController {
      *
      * @return
      */
+    @Access(roles = {
+            Role.GENERAL_USER,
+            Role.ADMIN
+    })
     @GetMapping
     public MultiResponse<QuestionnaireDTO> listQuestionnaires(@ModelAttribute QuestionnaireQry questionnaireInsertQry) {
         return questionnaireServiceI.listQuestionnaires(questionnaireInsertQry);
@@ -52,6 +61,10 @@ public class QuestionnaireController {
      * @param questionnaireCode 问卷code
      * @return
      */
+    @Access(roles = {
+            Role.GENERAL_USER,
+            Role.ADMIN
+    })
     @GetMapping("{questionnaireCode}")
     public SingleResponse<QuestionnaireDTO> getQuestionnaire(@PathVariable String questionnaireCode) {
         return SingleResponse.of(questionnaireServiceI.getQuestionnaire(questionnaireCode));
@@ -63,6 +76,9 @@ public class QuestionnaireController {
      * @param questionnaireCode 问卷唯一标识
      * @return
      */
+    @Access(roles = {
+            Role.ADMIN
+    })
     @PutMapping("deactivate")
     public Response deactivateQuestionnaire(@PathVariable String questionnaireCode) {
         questionnaireServiceI.deactivateQuestionnaire(questionnaireCode);
@@ -75,6 +91,10 @@ public class QuestionnaireController {
      * @param questionnaireReportCmd
      * @return
      */
+    @Access(roles = {
+            Role.GENERAL_USER,
+            Role.ADMIN
+    })
     @PostMapping("report")
     public Response reportQuestionnaire(@RequestBody QuestionnaireReportCmd questionnaireReportCmd) {
         questionnaireServiceI.reportQuestionnaire(questionnaireReportCmd);
