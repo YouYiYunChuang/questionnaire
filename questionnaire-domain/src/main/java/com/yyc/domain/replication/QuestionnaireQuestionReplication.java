@@ -20,7 +20,7 @@ public class QuestionnaireQuestionReplication {
     /**
      * 回答内容
      * json格式：{
-     * 问题key：问题答案1，问题答案2
+     * 问题细项code：答案
      * }
      */
     private String questionnaireQuestionReplicationContent;

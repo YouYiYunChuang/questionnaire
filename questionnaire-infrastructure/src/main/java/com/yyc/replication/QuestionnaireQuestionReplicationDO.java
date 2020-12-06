@@ -6,7 +6,6 @@ import com.gitee.sunchenbin.mybatis.actable.annotation.Column;
 import com.gitee.sunchenbin.mybatis.actable.annotation.Table;
 import com.gitee.sunchenbin.mybatis.actable.constants.MySqlTypeConstant;
 import com.yyc.BizDO;
-import lombok.Builder;
 import lombok.Data;
 
 /**
@@ -15,7 +14,6 @@ import lombok.Data;
  * @author yuchengyao
  */
 @Data
-@Builder
 @TableName(value = "questionnaire_question_replication")
 @Table(name = "questionnaire_question_replication")
 public class QuestionnaireQuestionReplicationDO extends BizDO {
@@ -30,14 +28,15 @@ public class QuestionnaireQuestionReplicationDO extends BizDO {
     /**
      * 回答内容
      */
-    @Column(name = "questionnaire_question_replication_content", type = MySqlTypeConstant.VARCHAR, comment = "回答内容")
+    @Column(name = "questionnaire_question_replication_content", type = MySqlTypeConstant.VARCHAR, length = 10000, comment = "回答内容")
     @TableField(value = "questionnaire_question_replication_content")
     private String questionnaireReplicationContent;
 
     /**
-     * 问卷回答人id
+     * 问卷回答人openId
      */
-    @Column(name = "report_id", type = MySqlTypeConstant.VARCHAR, comment = "问卷回答人id")
-    @TableField(value = "report_id")
+    @Column(name = "open_id", type = MySqlTypeConstant.VARCHAR, comment = "问卷回答人openId")
+    @TableField(value = "open_id")
     private String reportId;
+
 }

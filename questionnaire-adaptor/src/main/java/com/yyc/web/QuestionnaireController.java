@@ -10,6 +10,8 @@ import com.yyc.dto.QuestionnaireInsertCmd;
 import com.yyc.dto.QuestionnaireQry;
 import com.yyc.dto.QuestionnaireReportCmd;
 import com.yyc.dto.data.QuestionnaireDTO;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -20,6 +22,7 @@ import javax.validation.Valid;
  *
  * @author yuchengyao
  */
+@Api(value = "问卷相关接口", tags = {"问卷相关接口"})
 @RestController
 @RequestMapping("questionnaire")
 public class QuestionnaireController {
@@ -32,6 +35,7 @@ public class QuestionnaireController {
      *
      * @return
      */
+    @ApiOperation(value = "问卷调查新增（问题新增、问题细项新增）接口", notes = "问卷调查新增（问题新增、问题细项新增）接口")
     @Access(roles = {
             Role.ADMIN
     })

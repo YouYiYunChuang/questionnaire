@@ -19,7 +19,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -43,8 +42,6 @@ public class QuestionnaireGatewayImpl implements QuestionnaireGateway {
 
     @Override
     public MultiResponse<QuestionnaireDTO> listQuestionnaires(QuestionnaireQry questionnaireQry) {
-
-        List<QuestionnaireDO> questionnaireDOS = new ArrayList<>();
 
         IPage<QuestionnaireDO> userPage = new Page<>(questionnaireQry.getPageNum(), questionnaireQry.getPageSize());
 
@@ -80,7 +77,8 @@ public class QuestionnaireGatewayImpl implements QuestionnaireGateway {
     private Wrapper buildUpdateWrapper(QuestionnaireUpdateCmd questionnaireUpdateCmd) {
 
         Wrapper wrapper = new QueryWrapper()
-                .eq(questionnaireUpdateCmd.getQuestionnaireCode() != null, "questionnaire_code", questionnaireUpdateCmd.getQuestionnaireCode());
+                .eq(questionnaireUpdateCmd.getQuestionnaireCode() != null, "questionnaire_code", questionnaireUpdateCmd.getQuestionnaireCode())
+                .ne(true, "questionnaire.status", 21);
 
         return wrapper;
     }
@@ -89,7 +87,8 @@ public class QuestionnaireGatewayImpl implements QuestionnaireGateway {
 
         Wrapper wrapper = new QueryWrapper()
                 .eq(questionnaireQry.getQuestionnaireCode() != null, "questionnaire.questionnaire_code", questionnaireQry.getQuestionnaireCode())
-                .like(questionnaireQry.getQuestionnaireTitle() != null, "questionnaire.questionnaireTitle", questionnaireQry.getQuestionnaireTitle());
+                .like(questionnaireQry.getQuestionnaireTitle() != null, "questionnaire.questionnaireTitle", questionnaireQry.getQuestionnaireTitle())
+                .ne(true, "questionnaire.status", 21);
 
         return wrapper;
     }

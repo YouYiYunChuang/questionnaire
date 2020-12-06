@@ -15,6 +15,10 @@
 
     <dependencies>
         <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.yyc</groupId>
             <artifactId>questionnaire-adaptor</artifactId>
         </dependency>

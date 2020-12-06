@@ -1,6 +1,5 @@
 package com.yyc.dto.data;
 
-import com.yyc.dto.QuestionnaireQuestionInsertCmd;
 import lombok.Data;
 
 import java.util.Date;
@@ -46,4 +45,9 @@ public class QuestionnaireDTO {
      * 问卷问题列表
      */
     private List<QuestionnaireQuestionDTO> questionnaireQuestionDTOS;
+
+    /**
+     * 问卷状态
+     */
+    private Integer status;
 }

@@ -1,6 +1,9 @@
 package com.yyc.questionnaire.executor;
 
+import com.yyc.domain.exception.QuestionnaireException;
+import com.yyc.domain.exception.QuestionnaireExceptionCode;
 import com.yyc.domain.gateway.QuestionnaireGateway;
+import com.yyc.domain.status.DataStatus;
 import com.yyc.dto.QuestionnaireQry;
 import com.yyc.dto.data.QuestionnaireDTO;
 import org.springframework.stereotype.Component;
@@ -23,6 +26,12 @@ public class QuestionnaireGetExe {
 
         questionnaireQry.setQuestionnaireCode(questionnaireCode);
 
-        return questionnaireGateway.getQuestionnaire(questionnaireQry);
+        QuestionnaireDTO questionnaire = questionnaireGateway.getQuestionnaire(questionnaireQry);
+
+        if (DataStatus.DEACTIVATE.getCode().equals(questionnaire.getStatus())) {
+            new QuestionnaireException(QuestionnaireExceptionCode.QUESTIONNAIRE_EXCEPTION_STATUS_DEACTIVATE_EXCEPTION);
+        }
+        
+        return questionnaire;
     }
 }

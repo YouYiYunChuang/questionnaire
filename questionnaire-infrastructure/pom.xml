@@ -13,6 +13,11 @@
 	<dependencies>
 
 		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>com.gitee.sunchenbin.mybatis.actable</groupId>
 			<artifactId>mybatis-enhance-actable</artifactId>
 		</dependency>
