@@ -50,6 +50,7 @@ public class QuestionnaireController {
      *
      * @return
      */
+    @ApiOperation(value = "问卷调查列表（搜索）接口", notes = "问卷调查列表（搜索）接口")
     @Access(roles = {
             Role.GENERAL_USER,
             Role.ADMIN
@@ -65,6 +66,7 @@ public class QuestionnaireController {
      * @param questionnaireCode 问卷code
      * @return
      */
+    @ApiOperation(value = "问卷详情（问题、问题细项）接口", notes = "问卷详情（问题、问题细项）接口")
     @Access(roles = {
             Role.GENERAL_USER,
             Role.ADMIN
@@ -80,6 +82,7 @@ public class QuestionnaireController {
      * @param questionnaireCode 问卷唯一标识
      * @return
      */
+    @ApiOperation(value = "问卷停用接口", notes = "问卷停用接口")
     @Access(roles = {
             Role.ADMIN
     })
@@ -95,6 +98,7 @@ public class QuestionnaireController {
      * @param questionnaireReportCmd
      * @return
      */
+    @ApiOperation(value = "问卷填报接口", notes = "问卷填报接口")
     @Access(roles = {
             Role.GENERAL_USER,
             Role.ADMIN
