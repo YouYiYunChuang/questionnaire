@@ -160,6 +160,13 @@
                 <version>2.9.2</version>
             </dependency>
             <!-- swagger end -->
+
+            <!--JsonFormat-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-json</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

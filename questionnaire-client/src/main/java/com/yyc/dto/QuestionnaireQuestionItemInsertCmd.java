@@ -29,7 +29,6 @@ public class QuestionnaireQuestionItemInsertCmd {
     /**
      * 细项类型code：单选、多选、填空等
      */
-    @NotNull(message = "细项类型不可为空")
     private String questionnaireQuestionTypeCode;
 
     /**

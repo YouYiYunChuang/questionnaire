@@ -36,7 +36,6 @@ public class QuestionnaireQuestionInsertCmd {
     /**
      * 问题内容，填空题，问题项框架
      */
-    @NotNull(message = "问题内容不可以为空")
     private String questionnaireQuestionContent;
 
     /**

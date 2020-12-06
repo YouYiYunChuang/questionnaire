@@ -1,6 +1,9 @@
 package com.yyc.dto.data;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.List;
@@ -8,6 +11,8 @@ import java.util.List;
 /**
  * @author yuchengyao
  */
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class QuestionnaireDTO {
 
@@ -34,11 +39,13 @@ public class QuestionnaireDTO {
     /**
      * 问卷开始时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd", locale = "zh", timezone = "GMT+8")
     private Date questionnaireStartTime;
 
     /**
      * 问卷结束时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd", locale = "zh", timezone = "GMT+8")
     private Date questionnaireEndTime;
 
     /**

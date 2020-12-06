@@ -19,6 +19,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,6 +35,8 @@ public class QuestionnaireGatewayImpl implements QuestionnaireGateway {
     public QuestionnaireDTO getQuestionnaire(QuestionnaireQry questionnaireQry) {
 
         List<QuestionnaireDTO> questionnaireDOS = questionnaireMapper.getQuestionnaireDetails(buildQueryWrapper(questionnaireQry));
+
+        buildData(questionnaireDOS);
 
         checkReturn(questionnaireDOS);
 
@@ -72,6 +75,13 @@ public class QuestionnaireGatewayImpl implements QuestionnaireGateway {
         questionnaireDO.setStatus(DataStatus.NEW.getCode());
 
         questionnaireMapper.insert(questionnaireDO);
+    }
+
+    private void buildData(List<QuestionnaireDTO> questionnaireDOS) {
+        List<QuestionnaireDTO> questionnaireDTOList = new ArrayList<>();
+
+
+        questionnaireDOS = questionnaireDTOList;
     }
 
     private Wrapper buildUpdateWrapper(QuestionnaireUpdateCmd questionnaireUpdateCmd) {

@@ -10,6 +10,9 @@ import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
+/**
+ * @author yuchengyao
+ */
 @Mapper
 public interface QuestionnaireMapper extends BaseMapper<QuestionnaireDO> {
 
