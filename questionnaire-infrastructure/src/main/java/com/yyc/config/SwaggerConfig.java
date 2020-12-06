@@ -48,13 +48,13 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 // 页面标题
-                .title("三务公开服务的swagger服务集成")
+                .title("questionnaire-server")
                 // 创建人信息
                 .contact(new Contact("yucheng.yao", "18447073720@qq.com", "18447073720@qq.com"))
                 // 版本号
                 .version("1.0")
                 // 描述
-                .description("API 描述")
+                .description("questionnaire-server api documentation")
                 .build();
     }
 }
