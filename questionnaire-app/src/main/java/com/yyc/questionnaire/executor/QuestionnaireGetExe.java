@@ -23,8 +23,6 @@ public class QuestionnaireGetExe {
 
         questionnaireQry.setQuestionnaireCode(questionnaireCode);
 
-        questionnaireGateway.getQuestionnaire(questionnaireQry);
-        //  TODO:
-        return new QuestionnaireDTO();
+        return questionnaireGateway.getQuestionnaire(questionnaireQry);
     }
 }

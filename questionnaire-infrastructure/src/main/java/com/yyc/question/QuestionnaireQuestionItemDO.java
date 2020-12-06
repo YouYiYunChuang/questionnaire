@@ -25,28 +25,28 @@ public class QuestionnaireQuestionItemDO extends BaseDO {
      * 问题code
      */
     @Column(name = "questionnaire_question_code", type = MySqlTypeConstant.VARCHAR, comment = "问题code")
-    @TableField(value = "id")
+    @TableField(value = "questionnaire_question_code")
     private String questionnaire_question_code;
 
     /**
      * 细项排序
      */
     @Column(name = "questionnaire_question_item_sort", type = MySqlTypeConstant.INT, length = 4, comment = "细项排序")
-    @TableId(value = "questionnaire_question_item_sort")
+    @TableField(value = "questionnaire_question_item_sort")
     private Integer questionnaireQuestionItemSort;
 
     /**
      * 细项类型code：单选、多选、填空等
      */
     @Column(name = "questionnaire_question_type_code", type = MySqlTypeConstant.VARCHAR, comment = "细项类型code：单选、多选、填空等")
-    @TableId(value = "questionnaire_question_type_code")
+    @TableField(value = "questionnaire_question_type_code")
     private String questionnaireQuestionTypeCode;
 
     /**
      * 细项内容
      */
     @Column(name = "questionnaire_question_item_content", type = MySqlTypeConstant.VARCHAR, comment = "细项内容")
-    @TableId(value = "questionnaire_question_item_content")
+    @TableField(value = "questionnaire_question_item_content")
     private String questionnaireQuestionItemContent;
 
 }

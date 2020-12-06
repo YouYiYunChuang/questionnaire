@@ -21,7 +21,7 @@ public class BizDO extends BaseDO {
      */
     @Column(name = "status", type = MySqlTypeConstant.INT, length = 3, comment = "数据状态")
     @TableField(value = "status", fill = FieldFill.INSERT)
-    private Integer status;
+    private String status;
 
     /**
      * 创建人

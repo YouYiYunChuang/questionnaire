@@ -51,8 +51,8 @@ public class QuestionnaireServiceImpl implements QuestionnaireServiceI {
     }
 
     @Override
-    public void deactivateQuestionnaire(@NonNull String id) {
-        questionnaireDeactivateExe.deactivateQuestionnaire(id);
+    public void deactivateQuestionnaire(@NonNull String questionnaireCode) {
+        questionnaireDeactivateExe.deactivateQuestionnaire(questionnaireCode);
     }
 
     @Override

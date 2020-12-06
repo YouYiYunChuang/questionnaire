@@ -24,4 +24,11 @@ public interface QuestionnaireGateway {
      * @return
      */
     MultiResponse<QuestionnaireDTO> listQuestionnaires(QuestionnaireQry questionnaireQry);
+
+    /**
+     * 调查问卷
+     *
+     * @param questionnaireCode
+     */
+    void deactivateQuestionnaire(String questionnaireCode);
 }

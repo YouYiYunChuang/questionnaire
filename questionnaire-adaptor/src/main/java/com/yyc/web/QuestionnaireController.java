@@ -60,12 +60,12 @@ public class QuestionnaireController {
     /**
      * 问卷停用接口
      *
-     * @param id 问卷唯一标识
+     * @param questionnaireCode 问卷唯一标识
      * @return
      */
     @PutMapping("deactivate")
-    public Response deactivateQuestionnaire(@PathVariable String id) {
-        questionnaireServiceI.deactivateQuestionnaire(id);
+    public Response deactivateQuestionnaire(@PathVariable String questionnaireCode) {
+        questionnaireServiceI.deactivateQuestionnaire(questionnaireCode);
         return Response.buildSuccess();
     }
 

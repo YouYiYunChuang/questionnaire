@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.gitee.sunchenbin.mybatis.actable.annotation.Column;
 import com.gitee.sunchenbin.mybatis.actable.annotation.Table;
+import com.gitee.sunchenbin.mybatis.actable.annotation.Unique;
 import com.gitee.sunchenbin.mybatis.actable.constants.MySqlTypeConstant;
 import com.yyc.BaseDO;
 import lombok.Builder;
@@ -30,6 +31,7 @@ public class QuestionnaireQuestionDO extends BaseDO {
     /**
      * 问题code
      */
+    @Unique
     @Column(name = "questionnaire_question_code", type = MySqlTypeConstant.VARCHAR, comment = "问题code")
     @TableField(value = "questionnaire_question_code")
     private String questionnaireQuestionCode;

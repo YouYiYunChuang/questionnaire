@@ -5,39 +5,38 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.yyc.domain.exception.QuestionnaireException;
+import com.yyc.domain.exception.QuestionnaireExceptionCode;
 import com.yyc.domain.gateway.QuestionnaireGateway;
+import com.yyc.domain.status.DataStatus;
 import com.yyc.domain.utils.CollectionCopyUtil;
 import com.yyc.dto.QuestionnaireQry;
+import com.yyc.dto.QuestionnaireUpdateCmd;
 import com.yyc.dto.data.QuestionnaireDTO;
-import org.springframework.beans.BeanUtils;
+import lombok.NonNull;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author yuchengyao
+ */
+@Service
 public class QuestionnaireGatewayImpl implements QuestionnaireGateway {
 
     @Resource
     private QuestionnaireMapper questionnaireMapper;
 
-
     @Override
     public QuestionnaireDTO getQuestionnaire(QuestionnaireQry questionnaireQry) {
 
-        List<QuestionnaireDO> questionnaireDOS = new ArrayList<>();
-
-        questionnaireDOS = questionnaireMapper.selectList(buildWrapper(questionnaireQry));
+        List<QuestionnaireDTO> questionnaireDOS = questionnaireMapper.getQuestionnaireDetails(buildQueryWrapper(questionnaireQry));
 
         checkReturn(questionnaireDOS);
 
-        QuestionnaireDTO questionnaireDTO = new QuestionnaireDTO();
-
-        BeanUtils.copyProperties(questionnaireDOS.get(0), questionnaireDTO);
-
-
-        //
-
-        return questionnaireDTO;
+        return questionnaireDOS.get(0);
     }
 
     @Override
@@ -47,26 +46,44 @@ public class QuestionnaireGatewayImpl implements QuestionnaireGateway {
 
         IPage<QuestionnaireDO> userPage = new Page<>(questionnaireQry.getPageNum(), questionnaireQry.getPageSize());
 
-        IPage iPage = questionnaireMapper.selectPage(userPage, buildWrapper(questionnaireQry));
+        IPage iPage = questionnaireMapper.selectPage(userPage, buildQueryWrapper(questionnaireQry));
 
-        List records = iPage.getRecords();
-
-        return MultiResponse.of(CollectionCopyUtil.copyList(records, QuestionnaireDTO.class), Integer.parseInt(String.valueOf(iPage.getTotal())));
+        return MultiResponse.of(CollectionCopyUtil.copyList(iPage.getRecords(), QuestionnaireDTO.class), Integer.parseInt(String.valueOf(iPage.getTotal())));
     }
 
-    private Wrapper buildWrapper(QuestionnaireQry questionnaireQry) {
+    @Override
+    public void deactivateQuestionnaire(String questionnaireCode) {
+
+        QuestionnaireUpdateCmd questionnaireUpdateCmd = new QuestionnaireUpdateCmd();
+        questionnaireUpdateCmd.setQuestionnaireCode(questionnaireCode);
+
+        QuestionnaireDO questionnaireDO = new QuestionnaireDO();
+        questionnaireDO.setStatus(DataStatus.DEACTIVATE.getCode());
+
+        questionnaireMapper.update(questionnaireDO, buildUpdateWrapper(questionnaireUpdateCmd));
+    }
+
+    private Wrapper buildUpdateWrapper(QuestionnaireUpdateCmd questionnaireUpdateCmd) {
 
         Wrapper wrapper = new QueryWrapper()
-                .eq(false, "questionnaire_code", questionnaireQry.getQuestionnaireCode())
-                .like(false, "questionnaireTitle", questionnaireQry.getQuestionnaireTitle());
+                .eq(questionnaireUpdateCmd.getQuestionnaireCode() != null, "questionnaire_code", questionnaireUpdateCmd.getQuestionnaireCode());
 
         return wrapper;
     }
 
-    private void checkReturn(List<QuestionnaireDO> questionnaireDOS) {
+    private Wrapper buildQueryWrapper(@NonNull QuestionnaireQry questionnaireQry) {
+
+        Wrapper wrapper = new QueryWrapper()
+                .eq(questionnaireQry.getQuestionnaireCode() != null, "questionnaire_code", questionnaireQry.getQuestionnaireCode())
+                .like(questionnaireQry.getQuestionnaireTitle() != null, "questionnaireTitle", questionnaireQry.getQuestionnaireTitle());
+
+        return wrapper;
+    }
+
+    private void checkReturn(List<QuestionnaireDTO> questionnaireDOS) {
         if (questionnaireDOS == null || questionnaireDOS.isEmpty() || questionnaireDOS.size() > 2) {
             //  返回值异常
-            //  TODO:抛出异常
+            throw new QuestionnaireException(QuestionnaireExceptionCode.QUESTIONNAIRE_EXCEPTION_DATA_EXCEPTION);
         }
     }
 }

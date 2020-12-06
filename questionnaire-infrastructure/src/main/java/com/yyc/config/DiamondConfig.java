@@ -1,6 +1,5 @@
 package com.yyc.config;
 
-import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
@@ -15,14 +14,13 @@ import org.springframework.context.annotation.Configuration;
         "com.yyc.web",
         "com.yyc.question",
         "com.yyc.questionnaire",
+        "com.yyc.handler",
         "com.yyc.replication",
         "com.gitee.sunchenbin.mybatis.actable.manager.*",
-        "com.yyc.sms.handler"
 })
 @MapperScan(value = {
         "com.gitee.sunchenbin.mybatis.actable.dao.*",
-        "com.yyc.sms.sms",
-        "com.yyc.sms.configuration"
+        "com.yyc.questionnaire"
 })
 public class DiamondConfig {
     public final static String DummyConfig = "DummyConfig";

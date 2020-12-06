@@ -1,6 +1,9 @@
 package com.yyc.questionnaire.executor;
 
+import com.yyc.domain.gateway.QuestionnaireGateway;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
 
 /**
  * @author yuchengyao
@@ -8,7 +11,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class QuestionnaireDeactivateExe {
 
-    public void deactivateQuestionnaire(String id) {
-        //  TODO:
+    @Resource
+    private QuestionnaireGateway questionnaireGateway;
+
+    public void deactivateQuestionnaire(String questionnaireCode) {
+        questionnaireGateway.deactivateQuestionnaire(questionnaireCode);
     }
 }
