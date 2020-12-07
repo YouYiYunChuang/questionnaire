@@ -7,6 +7,7 @@ import com.gitee.sunchenbin.mybatis.actable.annotation.Table;
 import com.gitee.sunchenbin.mybatis.actable.annotation.Unique;
 import com.gitee.sunchenbin.mybatis.actable.constants.MySqlTypeConstant;
 import com.yyc.BaseDO;
+import com.yyc.BizDO;
 import lombok.Data;
 
 /**
@@ -15,7 +16,7 @@ import lombok.Data;
 @Data
 @TableName(value = "user")
 @Table(name = "user")
-public class UserDO extends BaseDO {
+public class UserDO extends BizDO {
 
     /**
      * 公开id
