@@ -42,6 +42,13 @@ public class QuestionnaireQuestionDO extends BaseDO {
     private Integer questionnaireQuestionSort;
 
     /**
+     * 问题类型
+     */
+    @Column(name = "questionnaire_question_type", type = MySqlTypeConstant.VARCHAR, comment = "问题序号")
+    @TableField(value = "questionnaire_question_type")
+    private String questionnaireQuestionType;
+
+    /**
      * 问题名称
      */
     @Column(name = "questionnaire_question_title", type = MySqlTypeConstant.VARCHAR, length = 1024, comment = "问题名称")

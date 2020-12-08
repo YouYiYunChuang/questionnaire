@@ -5,6 +5,7 @@ import lombok.Data;
 
 /**
  * 问卷问题模型
+ * @author yuchengyao
  */
 @Data
 @Builder
@@ -24,6 +25,11 @@ public class QuestionnaireQuestion {
      * 问题序号
      */
     private Integer questionnaireQuestionSort;
+
+    /**
+     * 问题类型
+     */
+    private String questionnaireQuestionType;
 
     /**
      * 问题名称

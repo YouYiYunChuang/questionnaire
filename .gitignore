@@ -31,3 +31,4 @@ build/
 .vscode/
 
 start/src/main/resources/application.properties
+logs/*
