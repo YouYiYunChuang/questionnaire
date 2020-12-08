@@ -26,7 +26,7 @@ public interface QuestionnaireQuestionMapper extends BaseMapper<QuestionnaireQue
                     @Result(property = "questionnaireQuestionItemDTOS", javaType = List.class, column = "questionnaire_question_code",
                             many = @Many(select = "com.yyc.question.QuestionnaireQuestionItemMapper.getQuestionnaireQuestionItemDetails"))
             })
-    @Select("select * from questionnaire_question where questionnaire_code = #{questionnaireCode}")
+    @Select("select * from questionnaire_question where questionnaire_code = #{questionnaireCode} order by questionnaire_question_sort")
     List<QuestionnaireQuestionDTO> getQuestionnaireQuestionDetails(@Param("questionnaireCode") String questionnaireCode);
 
 }

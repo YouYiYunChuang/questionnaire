@@ -14,9 +14,13 @@ import java.util.Map;
  */
 public enum QuestionnaireQuestionItemType implements Status {
 
-    STRING("STRING", "字符"),
+    INPUT("INPUT", "字符"),
 
-    INTEGER("INTEGER", "数字"),
+    NUMBER("NUMBER", "数字"),
+
+    CHECKBOX("CHECKBOX", "单选"),
+
+    RADIO("RADIO", "多选"),
 
     ;
 

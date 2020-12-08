@@ -12,6 +12,7 @@ import com.yyc.dto.QuestionnaireReportCmd;
 import com.yyc.dto.data.QuestionnaireDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -22,6 +23,7 @@ import javax.validation.Valid;
  *
  * @author yuchengyao
  */
+@Slf4j
 @Api(value = "问卷相关接口", tags = {"问卷相关接口"})
 @RestController
 @RequestMapping("questionnaire")

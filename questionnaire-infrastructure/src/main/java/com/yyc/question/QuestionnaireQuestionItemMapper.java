@@ -23,7 +23,7 @@ public interface QuestionnaireQuestionItemMapper extends BaseMapper<Questionnair
             value = {
                     @Result(property = "questionnaireQuestionCode", column = "questionnaire_question_code")
             })
-    @Select("select * from questionnaire_question_item where questionnaire_question_code = #{questionnaireQuestionCode}")
+    @Select("select * from questionnaire_question_item where questionnaire_question_code = #{questionnaireQuestionCode} order by questionnaire_question_item_sort")
     List<QuestionnaireQuestionItemDTO> getQuestionnaireQuestionItemDetails(@Param("questionnaireQuestionCode") String questionnaireQuestionCode);
 
 }

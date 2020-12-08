@@ -23,6 +23,5 @@ public class QuestionnaireReportExe {
         questionnaireReportCmd.setOpenId(openId);
 
         questionnaireQuestionReplicationGateway.insert(questionnaireReportCmd);
-        //  TODO:
     }
 }

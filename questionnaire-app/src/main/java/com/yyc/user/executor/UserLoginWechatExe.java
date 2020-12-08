@@ -53,7 +53,7 @@ public class UserLoginWechatExe {
         token.setRoleCode(new String[]{Role.GENERAL_USER.name()});
 
         //  token 缓存60分钟
-        redisUtils.setListExpire(token.getToken(), JsonUtils.toString(token), 60L, TimeUnit.MINUTES);
+        redisUtils.setString(token.getToken(), JsonUtils.toString(token), 60L, TimeUnit.MINUTES);
 
         return token;
     }

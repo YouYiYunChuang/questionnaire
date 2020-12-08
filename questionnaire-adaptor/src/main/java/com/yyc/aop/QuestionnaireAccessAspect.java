@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Aspect
-//@Component
+@Component
 public class QuestionnaireAccessAspect {
 
     @Resource
