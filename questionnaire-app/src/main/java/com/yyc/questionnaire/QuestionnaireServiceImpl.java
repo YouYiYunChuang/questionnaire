@@ -1,7 +1,11 @@
 package com.yyc.questionnaire;
 
+import cn.hutool.http.HttpUtil;
 import com.alibaba.cola.dto.MultiResponse;
+import com.google.gson.reflect.TypeToken;
 import com.yyc.api.QuestionnaireServiceI;
+import com.yyc.config.WechatConfig;
+import com.yyc.domain.utils.JsonUtils;
 import com.yyc.dto.QuestionnaireInsertCmd;
 import com.yyc.dto.QuestionnaireQry;
 import com.yyc.dto.QuestionnaireReportCmd;
@@ -13,6 +17,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author yuchengyao
@@ -38,6 +45,9 @@ public class QuestionnaireServiceImpl implements QuestionnaireServiceI {
 
     @Resource
     private QuestionnaireReportCheckExe questionnaireReportCheckExe;
+
+    @Resource
+    private WechatConfig wechatConfig;
 
     @Transactional
     @Override
@@ -67,8 +77,36 @@ public class QuestionnaireServiceImpl implements QuestionnaireServiceI {
     }
 
     @Override
-    public void checkReportQuestionnaire( @NonNull String questionnaireCode) {
+    public void checkReportQuestionnaire(@NonNull String questionnaireCode) {
         questionnaireReportCheckExe.checkQuestionnaire(questionnaireCode);
     }
 
+    @Override
+    public void shareQuestionnaire(String scene) {
+
+        String accessToken = getAccessToken();
+
+        Map<String, Object> data = new HashMap<>();
+
+        data.put("access_token", accessToken);
+        data.put("scene", scene);
+        data.put("page", "pages/detail/detail");
+
+        String post = HttpUtil.post(WechatConfig.getUnlimitedUrl, data);
+        
+        System.out.println(post);
+    }
+
+
+    private String getAccessToken() {
+
+        String formatUrl = String.format(WechatConfig.accessTokenUrl, wechatConfig.getAppID(), wechatConfig.getAppSecret());
+
+        Type type = new TypeToken<Map<String, String>>() {
+        }.getType();
+
+        Map<String, String> parse = JsonUtils.parse(HttpUtil.get(formatUrl), type);
+
+        return parse.get("access_token");
+    }
 }

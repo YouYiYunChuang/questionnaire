@@ -54,4 +54,12 @@ public interface QuestionnaireServiceI {
      * @param questionnaireCode
      */
     void checkReportQuestionnaire(String questionnaireCode);
+
+
+    /**
+     * 分享问卷
+     *
+     * @param scene
+     */
+    void shareQuestionnaire(String scene);
 }
