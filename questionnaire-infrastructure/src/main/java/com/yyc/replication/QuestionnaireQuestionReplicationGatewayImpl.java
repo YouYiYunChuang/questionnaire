@@ -9,6 +9,7 @@ import com.yyc.dto.QuestionnaireReportCmd;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -17,6 +18,7 @@ import java.util.List;
 @Component
 public class QuestionnaireQuestionReplicationGatewayImpl implements QuestionnaireQuestionReplicationGateway {
 
+    @Resource
     private QuestionnaireQuestionReplicationMapper questionnaireQuestionReplicationMapper;
 
     @Override
@@ -35,13 +37,14 @@ public class QuestionnaireQuestionReplicationGatewayImpl implements Questionnair
 
         Wrapper wrapper = new QueryWrapper()
                 .eq(questionnaireReportCmd.getOpenId() != null, "open_id", questionnaireReportCmd.getOpenId())
-                .eq(questionnaireReportCmd.getOpenId() != null, "questionnaire_code", questionnaireReportCmd.getQuestionnaireCode())
-                .ne(true, "questionnaire.status", 21);
+                .eq(questionnaireReportCmd.getQuestionnaireCode() != null, "questionnaire_code", questionnaireReportCmd.getQuestionnaireCode());
 
         List list = questionnaireQuestionReplicationMapper.selectList(wrapper);
 
-        if (list != null || list.isEmpty()) {
-            throw new QuestionnaireException(QuestionnaireExceptionCode.QUESTIONNAIRE_EXCEPTION_QUESTIONNAIRE_REPEAT_REPORT_EXCEPTION);
+        if (list == null || list.isEmpty()) {
+            return;
         }
+
+        throw new QuestionnaireException(QuestionnaireExceptionCode.QUESTIONNAIRE_EXCEPTION_QUESTIONNAIRE_REPEAT_REPORT_EXCEPTION);
     }
 }

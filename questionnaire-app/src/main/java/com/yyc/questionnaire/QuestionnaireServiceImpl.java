@@ -36,8 +36,11 @@ public class QuestionnaireServiceImpl implements QuestionnaireServiceI {
     @Resource
     private QuestionnaireReportExe questionnaireReportExe;
 
-    @Override
+    @Resource
+    private QuestionnaireReportCheckExe questionnaireReportCheckExe;
+
     @Transactional
+    @Override
     public void insert(@NonNull QuestionnaireInsertCmd questionnaireInsertCmd) {
         questionnaireInsertExe.insert(questionnaireInsertCmd);
     }
@@ -58,7 +61,14 @@ public class QuestionnaireServiceImpl implements QuestionnaireServiceI {
     }
 
     @Override
+    @Transactional
     public void reportQuestionnaire(@NonNull QuestionnaireReportCmd questionnaireReportCmd) {
         questionnaireReportExe.reportQuestionnaire(questionnaireReportCmd);
     }
+
+    @Override
+    public void checkReportQuestionnaire(@NonNull String openId, @NonNull String questionnaireCode) {
+        questionnaireReportCheckExe.checkQuestionnaire(openId, questionnaireCode);
+    }
+
 }
