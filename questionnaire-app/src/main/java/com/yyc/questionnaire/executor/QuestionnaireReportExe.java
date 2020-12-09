@@ -26,7 +26,7 @@ public class QuestionnaireReportExe {
 
         questionnaireReportCmd.setOpenId(openId);
 
-        questionnaireServiceI.checkReportQuestionnaire(openId, questionnaireReportCmd.getQuestionnaireCode());
+        questionnaireServiceI.checkReportQuestionnaire(questionnaireReportCmd.getQuestionnaireCode());
 
         questionnaireQuestionReplicationGateway.insert(questionnaireReportCmd);
     }

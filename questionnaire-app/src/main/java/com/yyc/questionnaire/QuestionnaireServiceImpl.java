@@ -67,8 +67,8 @@ public class QuestionnaireServiceImpl implements QuestionnaireServiceI {
     }
 
     @Override
-    public void checkReportQuestionnaire(@NonNull String openId, @NonNull String questionnaireCode) {
-        questionnaireReportCheckExe.checkQuestionnaire(openId, questionnaireCode);
+    public void checkReportQuestionnaire( @NonNull String questionnaireCode) {
+        questionnaireReportCheckExe.checkQuestionnaire(questionnaireCode);
     }
 
 }

@@ -3,6 +3,7 @@ package com.yyc.dto;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
+import java.util.Map;
 
 /**
  * @author yuchengyao
@@ -19,7 +20,7 @@ public class QuestionnaireReportCmd {
      * 回答内容
      */
     @NotNull(message = "内容不可为空")
-    private String questionnaireReplicationContent;
+    private Map<String, Object> questionnaireReplicationContent;
 
     /**
      * 问卷code

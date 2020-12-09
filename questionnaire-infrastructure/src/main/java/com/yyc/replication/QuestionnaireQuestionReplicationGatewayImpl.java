@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.yyc.domain.exception.QuestionnaireException;
 import com.yyc.domain.exception.QuestionnaireExceptionCode;
 import com.yyc.domain.gateway.QuestionnaireQuestionReplicationGateway;
+import com.yyc.domain.status.DataStatus;
+import com.yyc.domain.utils.JsonUtils;
 import com.yyc.dto.QuestionnaireReportCmd;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
@@ -28,8 +30,12 @@ public class QuestionnaireQuestionReplicationGatewayImpl implements Questionnair
 
         QuestionnaireQuestionReplicationDO questionnaireQuestionReplicationDO = new QuestionnaireQuestionReplicationDO();
 
-        BeanUtils.copyProperties(questionnaireQuestionReplicationDO, questionnaireQuestionReplicationDO);
+        BeanUtils.copyProperties(questionnaireReportCmd, questionnaireQuestionReplicationDO);
 
+        questionnaireQuestionReplicationDO.setQuestionnaireReplicationContent(JsonUtils.toString(questionnaireReportCmd.getQuestionnaireReplicationContent()));
+
+        questionnaireQuestionReplicationDO.setStatus(DataStatus.NEW.getCode());
+        
         questionnaireQuestionReplicationMapper.insert(questionnaireQuestionReplicationDO);
     }
 

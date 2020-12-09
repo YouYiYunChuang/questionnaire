@@ -42,6 +42,6 @@ public class QuestionnaireQuestionReplicationDO extends BizDO {
      */
     @Column(name = "open_id", type = MySqlTypeConstant.VARCHAR, comment = "问卷回答人openId")
     @TableField(value = "open_id")
-    private String reportId;
+    private String openId;
 
 }

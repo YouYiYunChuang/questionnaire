@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.yyc.access.AppContext;
 import com.yyc.domain.exception.QuestionnaireException;
 import com.yyc.domain.exception.QuestionnaireExceptionCode;
 import com.yyc.domain.gateway.QuestionnaireGateway;
@@ -34,7 +35,7 @@ public class QuestionnaireGatewayImpl implements QuestionnaireGateway {
     @Override
     public QuestionnaireDTO getQuestionnaire(QuestionnaireQry questionnaireQry) {
 
-        List<QuestionnaireDTO> questionnaireDOS = questionnaireMapper.getQuestionnaireDetails(buildQueryWrapper(questionnaireQry));
+        List<QuestionnaireDTO> questionnaireDOS = questionnaireMapper.getQuestionnaireDetails(buildQueryWrapper(questionnaireQry, false));
 
         buildData(questionnaireDOS);
 
@@ -48,7 +49,7 @@ public class QuestionnaireGatewayImpl implements QuestionnaireGateway {
 
         IPage<QuestionnaireDO> userPage = new Page<>(questionnaireQry.getPageNum(), questionnaireQry.getPageSize());
 
-        IPage iPage = questionnaireMapper.selectPage(userPage, buildQueryWrapper(questionnaireQry));
+        IPage iPage = questionnaireMapper.selectPage(userPage, buildQueryWrapper(questionnaireQry, true));
 
         return MultiResponse.of(CollectionCopyUtil.copyList(iPage.getRecords(), QuestionnaireDTO.class), Integer.parseInt(String.valueOf(iPage.getTotal())));
     }
@@ -93,12 +94,17 @@ public class QuestionnaireGatewayImpl implements QuestionnaireGateway {
         return wrapper;
     }
 
-    private Wrapper buildQueryWrapper(@NonNull QuestionnaireQry questionnaireQry) {
+    private Wrapper buildQueryWrapper(@NonNull QuestionnaireQry questionnaireQry, boolean isAccess) {
+
+        String openId = AppContext.getTokenDTO().getOpenId();
+
+        String accessSql = String.format("select questionnaire_question_replication.questionnaire_code FROM questionnaire_question_replication where questionnaire_question_replication.open_id = '%s'", openId);
 
         Wrapper wrapper = new QueryWrapper()
                 .eq(questionnaireQry.getQuestionnaireCode() != null, "questionnaire.questionnaire_code", questionnaireQry.getQuestionnaireCode())
                 .like(questionnaireQry.getQuestionnaireTitle() != null, "questionnaire.questionnaireTitle", questionnaireQry.getQuestionnaireTitle())
-                .ne(true, "questionnaire.status", 21);
+                .ne(true, "questionnaire.status", 21)
+                .notInSql(isAccess, "questionnaire.questionnaire_code", accessSql);
 
         return wrapper;
     }

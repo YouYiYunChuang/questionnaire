@@ -2,6 +2,7 @@ package com.yyc.aop;
 
 
 import com.yyc.access.Access;
+import com.yyc.access.AppContext;
 import com.yyc.access.Role;
 import com.yyc.config.RedisUtils;
 import com.yyc.domain.exception.QuestionnaireException;
@@ -67,8 +68,13 @@ public class QuestionnaireAccessAspect {
             throw new QuestionnaireException(QuestionnaireExceptionCode.QUESTIONNAIRE_EXCEPTION_USER_TOKEN_NULL_EXCEPTION);
         }
 
+        String string = redisUtils.getString(token);
+
         //  参数校验
-        checkAccess(token, accessAnnotation);
+        checkAccess(token, string, accessAnnotation);
+
+        //  用户信息存在线程中
+        AppContext.setPrincipal(JsonUtils.parse(string, TokenDTO.class));
     }
 
     private String getToken() {
@@ -106,16 +112,16 @@ public class QuestionnaireAccessAspect {
      * @param token
      * @param access
      */
-    private void checkAccess(String token, Access access) {
-        String string = redisUtils.getString(token);
+    private void checkAccess(String token, String accessString, Access access) {
 
-        if (string == null) {
+
+        if (accessString == null) {
 
             //  token 过期
             throw new QuestionnaireException(QuestionnaireExceptionCode.QUESTIONNAIRE_EXCEPTION_USER_TOKEN_EXPIRED_EXCEPTION);
         }
 
-        TokenDTO parse = JsonUtils.parse(string, TokenDTO.class);
+        TokenDTO parse = JsonUtils.parse(accessString, TokenDTO.class);
 
         String[] roleCodes = parse.getRoleCode();
 

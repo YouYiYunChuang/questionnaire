@@ -19,7 +19,7 @@ public class QuestionnaireReportCheckExe {
     @Resource
     private QuestionnaireServiceI questionnaireServiceI;
 
-    public void checkQuestionnaire(String openId, String questionnaireCode) {
+    public void checkQuestionnaire(String questionnaireCode) {
 
         QuestionnaireDTO questionnaire = questionnaireServiceI.getQuestionnaire(questionnaireCode);
 

@@ -107,7 +107,7 @@ public class QuestionnaireController {
             Role.ADMIN
     })
     @PostMapping("report")
-    public Response reportQuestionnaire(@RequestBody QuestionnaireReportCmd questionnaireReportCmd) {
+    public Response reportQuestionnaire(@RequestBody @Valid QuestionnaireReportCmd questionnaireReportCmd) {
         questionnaireServiceI.reportQuestionnaire(questionnaireReportCmd);
         return Response.buildSuccess();
     }

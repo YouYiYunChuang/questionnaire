@@ -51,8 +51,7 @@ public interface QuestionnaireServiceI {
     /**
      * 问卷上报校验
      *
-     * @param openId
      * @param questionnaireCode
      */
-    void checkReportQuestionnaire(String openId, String questionnaireCode);
+    void checkReportQuestionnaire(String questionnaireCode);
 }
