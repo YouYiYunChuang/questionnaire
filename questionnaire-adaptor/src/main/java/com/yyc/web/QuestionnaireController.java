@@ -120,9 +120,8 @@ public class QuestionnaireController {
      * @return
      */
     @GetMapping("share")
-    public Response shareQuestionnaire(String scene) {
-        questionnaireServiceI.shareQuestionnaire(scene);
-        return Response.buildSuccess();
+    public SingleResponse<byte[]> shareQuestionnaire(String scene, String page) throws Exception {
+        return SingleResponse.of(questionnaireServiceI.shareQuestionnaire(scene, page));
     }
 
 

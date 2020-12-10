@@ -60,6 +60,9 @@ public interface QuestionnaireServiceI {
      * 分享问卷
      *
      * @param scene
+     * @param page
+     * @return
+     * @throws Exception
      */
-    void shareQuestionnaire(String scene);
+    byte[] shareQuestionnaire(String scene, String page) throws Exception;
 }

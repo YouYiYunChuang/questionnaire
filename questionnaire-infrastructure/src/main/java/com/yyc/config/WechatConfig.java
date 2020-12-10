@@ -19,7 +19,7 @@ public class WechatConfig {
     /**
      * 通过该接口生成的小程序码，永久有效，数量暂无限制
      */
-    public static String getUnlimitedUrl = "https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=ACCESS_TOKEN";
+    public static String getUnlimitedUrl = "https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=%s";
 
     /**
      *accessTokenUrl
