@@ -39,8 +39,7 @@ public class QuestionnaireController {
      */
     @ApiOperation(value = "问卷调查新增（问题新增、问题细项新增）接口", notes = "问卷调查新增（问题新增、问题细项新增）接口")
     @Access(roles = {
-            Role.GENERAL_USER
-//            Role.ADMIN
+            Role.ADMIN
     })
     @PostMapping
     public Response insertQuestionnaire(@RequestBody @Valid QuestionnaireInsertCmd questionnaireInsertCmd) {

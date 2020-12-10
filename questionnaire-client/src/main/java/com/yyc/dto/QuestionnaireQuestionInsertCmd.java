@@ -22,6 +22,11 @@ public class QuestionnaireQuestionInsertCmd {
     private String questionnaireQuestionCode;
 
     /**
+     * 问题类型
+     */
+    private String questionnaireQuestionType;
+
+    /**
      * 问题序号
      */
     @NotNull(message = "问题序号不可以为空")
