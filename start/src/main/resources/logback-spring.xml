@@ -39,6 +39,8 @@
     <!--这个logger没有指定appender，它会继承root节点中定义的那些appender-->
     <logger name="com.yyc.questionnaire" level="DEBUG"/>
 
+    <logger name="com.gitee.sunchenbin.mybatis.actable" level="DEBUG"/>
+
     <!--数据库日志-->
     <!--由于这个logger自动继承了root的appender，root中已经有stdout的appender了，自己这边又引入了stdout的appender-->
     <!--如果没有设置 additivity="false" ,就会导致一条日志在控制台输出两次的情况-->

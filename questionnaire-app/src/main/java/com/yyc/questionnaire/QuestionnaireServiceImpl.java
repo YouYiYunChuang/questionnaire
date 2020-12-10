@@ -103,10 +103,11 @@ public class QuestionnaireServiceImpl implements QuestionnaireServiceI {
 
         String body = response.body();
 
+        log.info("请求返回：{}",body);
         Type type = new TypeToken<Map<String, String>>() {
         }.getType();
 
-        Map<String, String> parse = JsonUtils.parse(HttpUtil.get(body), type);
+        Map<String, String> parse = JsonUtils.parse(body, type);
 
         if ("41030".equals(parse.get("errcode"))) {
             throw new QuestionnaireException(QuestionnaireExceptionCode.QUESTIONNAIRE_EXCEPTION_SYSTEM_EXCEPTION);
