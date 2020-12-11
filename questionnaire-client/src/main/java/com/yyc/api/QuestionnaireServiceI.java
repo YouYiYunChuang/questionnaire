@@ -6,6 +6,8 @@ import com.yyc.dto.QuestionnaireQry;
 import com.yyc.dto.QuestionnaireReportCmd;
 import com.yyc.dto.data.QuestionnaireDTO;
 
+import java.util.Map;
+
 /**
  * @author yuchengyao
  */
@@ -51,9 +53,10 @@ public interface QuestionnaireServiceI {
     /**
      * 问卷上报校验
      *
-     * @param questionnaireCode
+     * @param questionnaireCode               问卷code
+     * @param questionnaireReplicationContent 问题上报内容
      */
-    void checkReportQuestionnaire(String questionnaireCode);
+    void checkReportQuestionnaire(String questionnaireCode, Map<String, Object> questionnaireReplicationContent);
 
 
     /**
