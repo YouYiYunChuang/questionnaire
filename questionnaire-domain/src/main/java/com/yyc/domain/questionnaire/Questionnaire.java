@@ -19,6 +19,11 @@ public class Questionnaire {
     private String questionnaireCode;
 
     /**
+     * 场景码
+     */
+    private String questionnaireScene;
+
+    /**
      * 问卷标题
      */
     private String questionnaireTitle;

@@ -22,6 +22,17 @@ public class QuestionnaireDTO {
     private String questionnaireCode;
 
     /**
+     * 场景码
+     */
+    private String questionnaireScene;
+
+    /**
+     * 问卷code
+     */
+    private String questionnaire;
+
+
+    /**
      * 问卷标题
      */
     private String questionnaireTitle;
