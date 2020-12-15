@@ -1,21 +1,32 @@
 package com.yyc.questionnaire.executor;
 
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
 import cn.hutool.http.HttpUtil;
+import com.alibaba.cola.dto.MultiResponse;
 import com.google.gson.reflect.TypeToken;
+import com.yyc.api.QuestionnaireServiceI;
 import com.yyc.config.WechatConfig;
 import com.yyc.domain.exception.QuestionnaireException;
 import com.yyc.domain.exception.QuestionnaireExceptionCode;
 import com.yyc.domain.utils.JsonUtils;
+import com.yyc.dto.QuestionnaireQry;
+import com.yyc.dto.data.QuestionnaireDTO;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,39 +40,113 @@ public class QuestionnaireShareExe {
     @Resource
     private WechatConfig wechatConfig;
 
+    @Resource
+    private QuestionnaireServiceI questionnaireServiceI;
+
     /**
      * 分享问卷返回二维码的baseCode
      *
      * @return
      */
     public byte[] shareQuestionnaire(@NonNull String scene, @NonNull String page) throws Exception {
+        HttpResponse response = getShareHttpResponse(scene, page);
+        return readInputStream(buildImageTitleInputStream(getQuestionnaireTitle(scene), response.bodyStream()));
+    }
+
+    /**
+     * 获取问卷的标题
+     *
+     * @param scene
+     * @return
+     */
+    private String getQuestionnaireTitle(String scene) {
+
+        QuestionnaireQry questionnaireQry = new QuestionnaireQry();
+        questionnaireQry.setQuestionnaireScene(scene);
+        MultiResponse<QuestionnaireDTO> questionnaireDTOMultiResponse = questionnaireServiceI.listQuestionnaires(questionnaireQry);
+
+        if (questionnaireDTOMultiResponse == null || CollectionUtil.isEmpty(questionnaireDTOMultiResponse.getData())) {
+            throw new QuestionnaireException(QuestionnaireExceptionCode.QUESTIONNAIRE_EXCEPTION_DATA_EXCEPTION);
+        }
+
+        return questionnaireDTOMultiResponse.getData().get(0).getQuestionnaireTitle();
+    }
+
+    private InputStream buildImageTitleInputStream(String title, InputStream inputStream) throws IOException {
+
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        ImageIO.write(this.createNewPic(title, ImageIO.read(inputStream)), "jpg", os);
+
+        return new ByteArrayInputStream(os.toByteArray());
+    }
+
+
+    private HttpResponse getShareHttpResponse(String scene, String page) {
 
         String accessToken = getAccessToken();
 
         Map<String, Object> data = new HashMap<>();
-
         data.put("scene", scene);
         data.put("page", page);
-
-        log.info(String.format(WechatConfig.getUnlimitedUrl, accessToken));
 
         HttpResponse response = HttpRequest.post(String.format(WechatConfig.getUnlimitedUrl, accessToken)).body(JsonUtils.toString(data)).execute();
 
         String body = response.body();
 
-        log.info("请求返回：{}", body);
-        Type type = new TypeToken<Map<String, String>>() {
-        }.getType();
+        try {
+            Type type = new TypeToken<Map<String, String>>() {
+            }.getType();
 
-        Map<String, String> parse = JsonUtils.parse(body, type);
+            Map<String, String> parse = JsonUtils.parse(body, type);
 
-        if ("41030".equals(parse.get("errcode"))) {
+            log.info("请求返回：{}", body);
+
             throw new QuestionnaireException(QuestionnaireExceptionCode.QUESTIONNAIRE_EXCEPTION_SYSTEM_EXCEPTION);
+
+        } catch (Exception e) {
+
+        }
+        return response;
+    }
+
+    public BufferedImage createNewPic(String title, BufferedImage logo) {
+
+        BufferedImage image = new BufferedImage(500, 550, BufferedImage.TYPE_INT_RGB);
+
+        //设置图片的背景色
+        Graphics2D main = image.createGraphics();
+        main.setColor(Color.white);
+        main.fillRect(0, 0, 500, 550);
+
+        //***********************插入中间广告图
+        Graphics mainPic = image.getGraphics();
+
+        if (logo != null) {
+            mainPic.drawImage(logo, 40, 40, 400, 400, null);
+            mainPic.dispose();
         }
 
-        return readInputStream(response.bodyStream());
+        //***********************页面头部
+        Graphics titleG = image.createGraphics();
+
+
+        //设置区域颜色
+        //titleG.setColor(Color.white);
+        //填充区域并确定区域大小位置
+        //titleG.fillRect(450, 50, 450, 50);
+        //设置字体颜色，先设置颜色，再填充内容
+        titleG.setColor(Color.BLACK);
+        //设置字体
+        Font titleFont = new Font("宋体", Font.BOLD, 22);
+        titleG.setFont(titleFont);
+
+        FontMetrics fm = titleG.getFontMetrics();
+
+        titleG.drawString(title, (image.getWidth(null) - fm.stringWidth(title)) / 2, 500);
+
+        return image;
     }
-    
+
     /**
      * 将流 保存为数据数组
      *
