@@ -25,6 +25,8 @@ public class QuestionnaireInsertExe {
 
         questionnaireInsertCmd.setQuestionnaireCode(CodeBuildUtils.getCode());
 
+        questionnaireInsertCmd.setQuestionnaireScene(CodeBuildUtils.getScene());
+
         questionnaireGateway.insert(questionnaireInsertCmd);
 
         questionnaireQuestionServiceI.batchInsert(questionnaireInsertCmd);

@@ -23,6 +23,11 @@ public class QuestionnaireInsertCmd {
     private String questionnaireCode;
 
     /**
+     * 场景
+     */
+    private String questionnaireScene;
+
+    /**
      * 问卷标题
      */
 

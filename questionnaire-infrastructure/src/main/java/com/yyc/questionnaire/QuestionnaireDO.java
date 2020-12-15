@@ -30,6 +30,14 @@ public class QuestionnaireDO extends BizDO {
     private String questionnaireCode;
 
     /**
+     * 场景码
+     */
+    @Unique
+    @Column(name = "questionnaire_scene", type = MySqlTypeConstant.VARCHAR, comment = "场景码")
+    @TableField(value = "questionnaire_scene")
+    private String questionnaireScene;
+
+    /**
      * 问卷标题
      */
     @Column(name = "questionnaire_title", type = MySqlTypeConstant.VARCHAR, comment = "问卷标题")

@@ -102,6 +102,7 @@ public class QuestionnaireGatewayImpl implements QuestionnaireGateway {
 
         Wrapper wrapper = new QueryWrapper()
                 .eq(questionnaireQry.getQuestionnaireCode() != null, "questionnaire.questionnaire_code", questionnaireQry.getQuestionnaireCode())
+                .eq(questionnaireQry.getQuestionnaireScene() != null, "questionnaire.questionnaire_scene", questionnaireQry.getQuestionnaireScene())
                 .like(questionnaireQry.getQuestionnaireTitle() != null, "questionnaire.questionnaireTitle", questionnaireQry.getQuestionnaireTitle())
                 .ne(true, "questionnaire.status", 21)
                 .notInSql(isAccess, "questionnaire.questionnaire_code", accessSql);

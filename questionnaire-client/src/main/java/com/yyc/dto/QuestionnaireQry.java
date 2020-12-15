@@ -19,4 +19,9 @@ public class QuestionnaireQry extends PageQuery {
      */
     private String questionnaireCode;
 
+    /**
+     * 场景码
+     */
+    private String questionnaireScene;
+
 }
