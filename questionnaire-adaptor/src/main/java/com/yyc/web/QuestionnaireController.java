@@ -6,6 +6,7 @@ import com.alibaba.cola.dto.SingleResponse;
 import com.yyc.access.Access;
 import com.yyc.access.Role;
 import com.yyc.api.QuestionnaireServiceI;
+import com.yyc.domain.utils.JsonUtils;
 import com.yyc.dto.QuestionnaireInsertCmd;
 import com.yyc.dto.QuestionnaireQry;
 import com.yyc.dto.QuestionnaireReportCmd;
@@ -58,14 +59,14 @@ public class QuestionnaireController {
             Role.ADMIN
     })
     @GetMapping
-    public MultiResponse<QuestionnaireDTO> listQuestionnaires(@ModelAttribute QuestionnaireQry questionnaireInsertQry) {
-        return questionnaireServiceI.listQuestionnaires(questionnaireInsertQry);
+    public MultiResponse<QuestionnaireDTO> listQuestionnaires(@ModelAttribute QuestionnaireQry questionnaireQry) {
+        return questionnaireServiceI.listQuestionnaires(questionnaireQry);
     }
 
     /**
      * 问卷详情（问题、问题细项）接口
      *
-     * @param questionnaireCode 问卷code
+     * @param questionnaireQry 问卷CODE 或
      * @return
      */
     @ApiOperation(value = "问卷详情（问题、问题细项）接口", notes = "问卷详情（问题、问题细项）接口")
@@ -73,9 +74,10 @@ public class QuestionnaireController {
             Role.GENERAL_USER,
             Role.ADMIN
     })
-    @GetMapping("{questionnaireCode}")
-    public SingleResponse<QuestionnaireDTO> getQuestionnaire(@PathVariable String questionnaireCode) {
-        return SingleResponse.of(questionnaireServiceI.getQuestionnaire(questionnaireCode));
+    @GetMapping("details")
+    public SingleResponse<QuestionnaireDTO> getQuestionnaire(@ModelAttribute QuestionnaireQry questionnaireQry) {
+        log.info("{}", JsonUtils.toString(questionnaireQry));
+        return SingleResponse.of(questionnaireServiceI.getQuestionnaire(questionnaireQry));
     }
 
     /**

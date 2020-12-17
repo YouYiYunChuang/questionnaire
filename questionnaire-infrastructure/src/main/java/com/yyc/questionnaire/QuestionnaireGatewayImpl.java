@@ -11,13 +11,16 @@ import com.yyc.domain.exception.QuestionnaireExceptionCode;
 import com.yyc.domain.gateway.QuestionnaireGateway;
 import com.yyc.domain.status.DataStatus;
 import com.yyc.domain.utils.CollectionCopyUtil;
+import com.yyc.domain.utils.JsonUtils;
 import com.yyc.dto.QuestionnaireInsertCmd;
 import com.yyc.dto.QuestionnaireQry;
 import com.yyc.dto.QuestionnaireUpdateCmd;
 import com.yyc.dto.data.QuestionnaireDTO;
 import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -26,6 +29,7 @@ import java.util.List;
 /**
  * @author yuchengyao
  */
+@Slf4j
 @Service
 public class QuestionnaireGatewayImpl implements QuestionnaireGateway {
 
@@ -101,9 +105,9 @@ public class QuestionnaireGatewayImpl implements QuestionnaireGateway {
         String accessSql = String.format("select questionnaire_question_replication.questionnaire_code FROM questionnaire_question_replication where questionnaire_question_replication.open_id = '%s'", openId);
 
         Wrapper wrapper = new QueryWrapper()
-                .eq(questionnaireQry.getQuestionnaireCode() != null, "questionnaire.questionnaire_code", questionnaireQry.getQuestionnaireCode())
-                .eq(questionnaireQry.getQuestionnaireScene() != null, "questionnaire.questionnaire_scene", questionnaireQry.getQuestionnaireScene())
-                .like(questionnaireQry.getQuestionnaireTitle() != null, "questionnaire.questionnaireTitle", questionnaireQry.getQuestionnaireTitle())
+                .eq(!StringUtils.isEmpty(questionnaireQry.getQuestionnaireCode()), "questionnaire.questionnaire_code", questionnaireQry.getQuestionnaireCode())
+                .eq(!StringUtils.isEmpty(questionnaireQry.getQuestionnaireScene()), "questionnaire.questionnaire_scene", questionnaireQry.getQuestionnaireScene())
+                .like(!StringUtils.isEmpty(questionnaireQry.getQuestionnaireTitle()), "questionnaire.questionnaire_title", questionnaireQry.getQuestionnaireTitle())
                 .ne(true, "questionnaire.status", 21)
                 .notInSql(isAccess, "questionnaire.questionnaire_code", accessSql);
 
@@ -111,6 +115,8 @@ public class QuestionnaireGatewayImpl implements QuestionnaireGateway {
     }
 
     private void checkReturn(List<QuestionnaireDTO> questionnaireDOS) {
+
+//        log.info("{}", JsonUtils.toString(questionnaireDOS));
         if (questionnaireDOS == null || questionnaireDOS.isEmpty() || questionnaireDOS.size() > 2) {
             //  返回值异常
             throw new QuestionnaireException(QuestionnaireExceptionCode.QUESTIONNAIRE_EXCEPTION_DATA_EXCEPTION);

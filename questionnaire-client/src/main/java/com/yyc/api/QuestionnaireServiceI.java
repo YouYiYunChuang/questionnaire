@@ -23,18 +23,18 @@ public interface QuestionnaireServiceI {
     /**
      * 问卷列表
      *
-     * @param questionnaireInsertQry
+     * @param questionnaireQry
      * @return
      */
-    MultiResponse<QuestionnaireDTO> listQuestionnaires(QuestionnaireQry questionnaireInsertQry);
+    MultiResponse<QuestionnaireDTO> listQuestionnaires(QuestionnaireQry questionnaireQry);
 
     /**
      * 问卷详情
      *
-     * @param id
+     * @param questionnaireQry
      * @return
      */
-    QuestionnaireDTO getQuestionnaire(String id);
+    QuestionnaireDTO getQuestionnaire(QuestionnaireQry questionnaireQry);
 
     /**
      * 问卷停用

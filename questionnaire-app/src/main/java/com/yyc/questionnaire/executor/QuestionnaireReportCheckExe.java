@@ -4,6 +4,7 @@ import cn.hutool.core.date.DateUtil;
 import com.yyc.api.QuestionnaireServiceI;
 import com.yyc.domain.exception.QuestionnaireException;
 import com.yyc.domain.exception.QuestionnaireExceptionCode;
+import com.yyc.dto.QuestionnaireQry;
 import com.yyc.dto.data.QuestionnaireDTO;
 import lombok.NonNull;
 import org.springframework.stereotype.Component;
@@ -23,7 +24,9 @@ public class QuestionnaireReportCheckExe {
 
     public void checkQuestionnaire(@NonNull String questionnaireCode, @NonNull Map<String, Object> questionnaireReplicationContent) {
 
-        QuestionnaireDTO questionnaire = questionnaireServiceI.getQuestionnaire(questionnaireCode);
+        QuestionnaireQry questionnaireQry = new QuestionnaireQry();
+        questionnaireQry.setQuestionnaireCode(questionnaireCode);
+        QuestionnaireDTO questionnaire = questionnaireServiceI.getQuestionnaire(questionnaireQry);
 
         checkQuestionnaire(questionnaire, questionnaireReplicationContent);
 

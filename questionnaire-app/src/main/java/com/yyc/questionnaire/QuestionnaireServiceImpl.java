@@ -62,13 +62,13 @@ public class QuestionnaireServiceImpl implements QuestionnaireServiceI {
     }
 
     @Override
-    public MultiResponse<QuestionnaireDTO> listQuestionnaires(@NonNull QuestionnaireQry questionnaireInsertQry) {
-        return questionnairesListExe.listQuestionnaires(questionnaireInsertQry);
+    public MultiResponse<QuestionnaireDTO> listQuestionnaires(@NonNull QuestionnaireQry questionnaireQry) {
+        return questionnairesListExe.listQuestionnaires(questionnaireQry);
     }
 
     @Override
-    public QuestionnaireDTO getQuestionnaire(@NonNull String questionnaireCode) {
-        return questionnaireGetExe.getQuestionnaire(questionnaireCode);
+    public QuestionnaireDTO getQuestionnaire(@NonNull QuestionnaireQry questionnaireQry) {
+        return questionnaireGetExe.getQuestionnaire(questionnaireQry.getQuestionnaireCode(), questionnaireQry.getQuestionnaireScene());
     }
 
     @Override
