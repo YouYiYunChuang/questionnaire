@@ -32,7 +32,6 @@ public class UserController {
     @ApiOperation(value = "小程序用户登录接口", notes = "小程序用户登录接口")
     @PostMapping("login")
     public SingleResponse<TokenDTO> wechatLogin(@RequestParam String code) {
-
         return SingleResponse.of(userServicesI.wechatLogin(code));
     }
 }
