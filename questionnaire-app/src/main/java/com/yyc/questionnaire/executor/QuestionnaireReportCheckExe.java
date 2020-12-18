@@ -4,14 +4,19 @@ import cn.hutool.core.date.DateUtil;
 import com.yyc.api.QuestionnaireServiceI;
 import com.yyc.domain.exception.QuestionnaireException;
 import com.yyc.domain.exception.QuestionnaireExceptionCode;
+import com.yyc.domain.status.QuestionnaireQuestionType;
 import com.yyc.dto.QuestionnaireQry;
 import com.yyc.dto.data.QuestionnaireDTO;
+import com.yyc.dto.data.QuestionnaireQuestionDTO;
+import com.yyc.dto.data.QuestionnaireQuestionItemDTO;
 import lombok.NonNull;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author yuchengyao
@@ -47,16 +52,52 @@ public class QuestionnaireReportCheckExe {
     private void checkLegitimateQuestionnaireReplicationContent(@NonNull QuestionnaireDTO questionnaire, @NonNull Map<String, Object> questionnaireReplicationContent) {
 
         questionnaire.getQuestionnaireQuestionDTOS().forEach(questionnaireQuestionDTO -> {
-            questionnaireQuestionDTO.getQuestionnaireQuestionItemDTOS().forEach(questionnaireQuestionItemDTO -> {
 
-                //  细项 code
-                String questionnaireQuestionItemCode = questionnaireQuestionItemDTO.getQuestionnaireQuestionItemCode();
+            //  单选题 or 多选题
+            if (QuestionnaireQuestionType.SINGLE_CHOICE.name().equals(questionnaireQuestionDTO.getQuestionnaireQuestionType())
+                    || QuestionnaireQuestionType.MULTIPLE_CHOICE.name().equals(questionnaireQuestionDTO.getQuestionnaireQuestionType())) {
 
-                if (!questionnaireReplicationContent.containsKey(questionnaireQuestionItemCode)) {
-                    String exceptionMessage = String.format("题为：《%s》 的问卷有答案未填！！！", questionnaireQuestionDTO.getQuestionnaireQuestionTitle());
-                    throw new QuestionnaireException(QuestionnaireExceptionCode.QUESTIONNAIRE_EXCEPTION_QUESTIONNAIRE_REPLICATION_CONTENT_CHECK_EXCEPTION, exceptionMessage);
-                }
-            });
+                Set<String> questionnaireReplicationContentCodeSet = questionnaireQuestionDTO.getQuestionnaireQuestionItemDTOS().stream().collect(Collectors.toMap(QuestionnaireQuestionItemDTO::getQuestionnaireQuestionItemCode, value -> value, (a, b) -> a)).keySet();
+
+                Set<String> allQuestionnaireReplicationContentCodeSet = questionnaireReplicationContent.keySet();
+
+                boolean retainAll = questionnaireReplicationContentCodeSet.retainAll(allQuestionnaireReplicationContentCodeSet);
+
+                throwQuestionnaireException(retainAll, questionnaireQuestionDTO);
+
+                return;
+            }
+
+            //  填空题
+            if (QuestionnaireQuestionType.FILL_IN_THE_BLANK.name().equals(questionnaireQuestionDTO.getQuestionnaireQuestionType())) {
+
+                questionnaireQuestionDTO.getQuestionnaireQuestionItemDTOS().forEach(questionnaireQuestionItemDTO -> {
+                    //  细项 code
+                    String questionnaireQuestionItemCode = questionnaireQuestionItemDTO.getQuestionnaireQuestionItemCode();
+
+                    if (!questionnaireReplicationContent.containsKey(questionnaireQuestionItemCode)) {
+
+                        throwQuestionnaireException(false, questionnaireQuestionDTO);
+                    }
+                });
+
+                return;
+            }
+
+
         });
+    }
+
+    /**
+     * @param retainAll
+     * @param questionnaireQuestionDTO
+     */
+    private void throwQuestionnaireException(boolean retainAll, QuestionnaireQuestionDTO questionnaireQuestionDTO) {
+
+        if (!retainAll) {
+            String exceptionMessage = String.format("题为：《%s》 的问卷有答案未填！！！", questionnaireQuestionDTO.getQuestionnaireQuestionTitle());
+            throw new QuestionnaireException(exceptionMessage);
+        }
+
     }
 }

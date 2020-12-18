@@ -109,6 +109,7 @@ public class QuestionnaireController {
     })
     @PostMapping("report")
     public Response reportQuestionnaire(@RequestBody @Valid QuestionnaireReportCmd questionnaireReportCmd) {
+        log.info("填报内容:{}",JsonUtils.toString(questionnaireReportCmd));
         questionnaireServiceI.reportQuestionnaire(questionnaireReportCmd);
         return Response.buildSuccess();
     }

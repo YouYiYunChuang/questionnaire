@@ -40,6 +40,9 @@ public class QuestionnaireExceptionHandler {
     @ResponseBody
     public Response busExceptionHandler(QuestionnaireException e) {
         log.error("业务异常", e);
+        if (e.getErrCode() == null) {
+            return Response.buildFailure(QuestionnaireExceptionCode.QUESTIONNAIRE_EXCEPTION_BIZ_EXCEPTION.getErrCode(), e.getMessage());
+        }
         return Response.buildFailure(e.getErrCode().getErrCode(), e.getErrCode().getErrDesc());
     }
 

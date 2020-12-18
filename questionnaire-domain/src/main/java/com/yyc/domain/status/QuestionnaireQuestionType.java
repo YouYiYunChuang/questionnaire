@@ -15,7 +15,7 @@ import java.util.Map;
 public enum QuestionnaireQuestionType implements Status {
 
 
-    SINGLE_CHOICE("MULTIPLE_CHOICE", "单选题"),
+    SINGLE_CHOICE("SINGLE_CHOICE", "单选题"),
 
     MULTIPLE_CHOICE("MULTIPLE_CHOICE", "多选题"),
 
