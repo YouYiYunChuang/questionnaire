@@ -2,6 +2,7 @@ package com.yyc.questionnaire.executor.query;
 
 import com.google.gson.reflect.TypeToken;
 import com.yyc.domain.gateway.QuestionnaireQuestionReplicationGateway;
+import com.yyc.domain.status.QuestionnaireQuestionType;
 import com.yyc.domain.utils.JsonUtils;
 import com.yyc.dto.QuestionnaireQuestionReplicationQry;
 import com.yyc.dto.data.QuestionnaireDTO;
@@ -10,6 +11,7 @@ import com.yyc.dto.data.QuestionnaireQuestionItemDTO;
 import com.yyc.dto.data.QuestionnaireQuestionReplicationDTO;
 import lombok.NonNull;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.lang.reflect.Type;
@@ -78,6 +80,26 @@ public class QuestionnaireResultExe {
 
             List<QuestionnaireQuestionItemDTO> questionnaireQuestionItemDTOdata = questionnaireQuestion.getQuestionnaireQuestionItemDTOS().stream().sorted(Comparator.comparing(QuestionnaireQuestionItemDTO::getQuestionnaireQuestionItemSort)).collect(Collectors.toList());
 
+            if (QuestionnaireQuestionType.SINGLE_CHOICE.name().equals(questionnaireQuestion.getQuestionnaireQuestionType())) {
+
+                //  单选题
+                Map<String, String> questionnaireHeaderMap = new Hashtable<>();
+                Map<String, String> questionnaireQuestionHeaderMap = new Hashtable<>();
+                Map<String, String> questionnaireQuestionItemHeaderMap = new Hashtable<>();
+
+                questionnaireHeaderMap.put(questionnaire.getQuestionnaireCode(), questionnaire.getQuestionnaireTitle());
+                questionnaireQuestionHeaderMap.put(questionnaireQuestion.getQuestionnaireQuestionCode(), questionnaireQuestion.getQuestionnaireQuestionTitle());
+                questionnaireQuestionItemDTOdata.forEach(questionnaireQuestionItem -> {
+                    questionnaireQuestionItemHeaderMap.put(questionnaireQuestionItem.getQuestionnaireQuestionItemCode(), questionnaireQuestionItem.getQuestionnaireQuestionItemContent());
+                });
+
+
+                questionnaireHeader.add(questionnaireHeaderMap);
+                questionnaireQuestionHeader.add(questionnaireQuestionHeaderMap);
+                questionnaireQuestionItemHeader.add(questionnaireQuestionItemHeaderMap);
+                return;
+            }
+
             questionnaireQuestionItemDTOdata.forEach(questionnaireQuestionItem -> {
 
                 Map<String, String> questionnaireHeaderMap = new Hashtable<>();
@@ -117,8 +139,10 @@ public class QuestionnaireResultExe {
 
         List<List<Map<String, String>>> result = new ArrayList<>();
 
+        //  第三级表头
         List<Map<String, String>> headerList = resultHeader.get(resultHeader.size() - 1);
 
+        //  所有回答
         List<QuestionnaireQuestionReplicationDTO> questionnaireQuestionReplicationDTOS = questionnaireQuestionReplicationGateway.getQuestionnaireQuestionReplication(QuestionnaireQuestionReplicationQry.builder().questionnaireCode(questionnaireCode).build());
 
         questionnaireQuestionReplicationDTOS.forEach(questionnaireQuestionReplication -> {
@@ -134,14 +158,47 @@ public class QuestionnaireResultExe {
 
             headerList.forEach(headerRow -> {
 
-                Map<String, String> data = new HashMap<>(1);
-                headerRow.forEach((key, value) -> {
+                Map<String, String> data = new HashMap<>();
 
-                    String dataValue = questionnaireReplicationContentMap.get(key);
-                    data.put(key, dataValue);
-                });
+                String answerKey = "";
+                String answerValue = "";
+
+                if (headerRow.size() == 1) {
+
+                    for (Map.Entry<String, String> value : headerRow.entrySet()) {
+
+                        String dataValue = questionnaireReplicationContentMap.get(value.getKey());
+
+                        if (!StringUtils.isEmpty(dataValue)) {
+                            answerKey = value.getKey();
+                            answerValue = dataValue;
+                            break;
+                        }
+                    }
+
+                    data.put(answerKey, answerValue);
+                    resultRow.add(data);
+                    return;
+                }
+
+                for (Map.Entry<String, String> value : headerRow.entrySet()) {
+
+                    String dataValue = questionnaireReplicationContentMap.get(value.getKey());
+
+                    if (!StringUtils.isEmpty(dataValue)) {
+                        answerKey = value.getKey();
+                        answerValue = value.getValue();
+                        break;
+                    }
+                }
+
+                data.put(answerKey, answerValue);
 
                 resultRow.add(data);
+
+
+
+
             });
 
             result.add(resultRow);

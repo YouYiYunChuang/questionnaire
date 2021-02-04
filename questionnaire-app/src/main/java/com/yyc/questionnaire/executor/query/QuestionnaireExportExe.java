@@ -49,9 +49,7 @@ public class QuestionnaireExportExe {
         headData.forEach(head -> {
             List<String> addRow = new ArrayList<>();
             head.forEach(row -> {
-                row.forEach((key, value) -> {
-                    addRow.add(value);
-                });
+                addRow.add(String.join("、", row.values()));
             });
             headResult.add(addRow);
         });
