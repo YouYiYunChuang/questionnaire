@@ -1,4 +1,4 @@
-package com.yyc.questionnaire.executor;
+package com.yyc.questionnaire.executor.query;
 
 import com.alibaba.cola.dto.MultiResponse;
 import com.yyc.domain.gateway.QuestionnaireGateway;

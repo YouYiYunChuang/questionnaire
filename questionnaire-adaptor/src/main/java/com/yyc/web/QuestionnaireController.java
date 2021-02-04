@@ -17,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 /**
@@ -109,7 +110,7 @@ public class QuestionnaireController {
     })
     @PostMapping("report")
     public Response reportQuestionnaire(@RequestBody @Valid QuestionnaireReportCmd questionnaireReportCmd) {
-        log.info("填报内容:{}",JsonUtils.toString(questionnaireReportCmd));
+        log.info("填报内容:{}", JsonUtils.toString(questionnaireReportCmd));
         questionnaireServiceI.reportQuestionnaire(questionnaireReportCmd);
         return Response.buildSuccess();
     }
@@ -124,6 +125,18 @@ public class QuestionnaireController {
     @GetMapping("share")
     public SingleResponse<byte[]> shareQuestionnaire(String scene, String page) throws Exception {
         return SingleResponse.of(questionnaireServiceI.shareQuestionnaire(scene, page));
+    }
+
+    /**
+     * 问卷上报结果导出
+     *
+     * @param questionnaireCode
+     * @return
+     */
+    @GetMapping("export/result/{questionnaireCode}")
+    public Response exportResultByQuestionnaireCode(@PathVariable String questionnaireCode, HttpServletResponse response) throws Exception {
+        questionnaireServiceI.exportResultByQuestionnaireCode(questionnaireCode, response);
+        return Response.buildSuccess();
     }
 
 

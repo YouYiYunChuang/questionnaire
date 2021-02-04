@@ -5,7 +5,9 @@ import com.yyc.dto.QuestionnaireInsertCmd;
 import com.yyc.dto.QuestionnaireQry;
 import com.yyc.dto.QuestionnaireReportCmd;
 import com.yyc.dto.data.QuestionnaireDTO;
+import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 /**
@@ -68,4 +70,13 @@ public interface QuestionnaireServiceI {
      * @throws Exception
      */
     byte[] shareQuestionnaire(String scene, String page) throws Exception;
+
+
+    /**
+     * 问卷结果导出
+     *
+     * @param questionnaireCode
+     */
+    void exportResultByQuestionnaireCode(@PathVariable String questionnaireCode, HttpServletResponse response) throws Exception;
+
 }

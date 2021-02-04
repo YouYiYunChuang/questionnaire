@@ -1,30 +1,24 @@
 package com.yyc.questionnaire;
 
-import cn.hutool.http.HttpRequest;
-import cn.hutool.http.HttpResponse;
-import cn.hutool.http.HttpUtil;
 import com.alibaba.cola.dto.MultiResponse;
-import com.google.gson.reflect.TypeToken;
 import com.yyc.api.QuestionnaireServiceI;
-import com.yyc.config.WechatConfig;
-import com.yyc.domain.exception.QuestionnaireException;
-import com.yyc.domain.exception.QuestionnaireExceptionCode;
-import com.yyc.domain.utils.JsonUtils;
 import com.yyc.dto.QuestionnaireInsertCmd;
 import com.yyc.dto.QuestionnaireQry;
 import com.yyc.dto.QuestionnaireReportCmd;
 import com.yyc.dto.data.QuestionnaireDTO;
 import com.yyc.questionnaire.executor.*;
+import com.yyc.questionnaire.executor.query.QuestionnaireExportExe;
+import com.yyc.questionnaire.executor.query.QuestionnaireGetExe;
+import com.yyc.questionnaire.executor.query.QuestionnaireResultExe;
+import com.yyc.questionnaire.executor.query.QuestionnairesListExe;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.lang.reflect.Type;
-import java.util.HashMap;
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -54,6 +48,12 @@ public class QuestionnaireServiceImpl implements QuestionnaireServiceI {
 
     @Resource
     private QuestionnaireShareExe questionnaireShareExe;
+
+    @Resource
+    private QuestionnaireResultExe questionnaireResultExe;
+
+    @Resource
+    private QuestionnaireExportExe questionnaireExportExe;
 
     @Transactional(rollbackFor = Exception.class)
     @Override
@@ -90,5 +90,12 @@ public class QuestionnaireServiceImpl implements QuestionnaireServiceI {
     @Override
     public byte[] shareQuestionnaire(@NonNull String scene, @NonNull String page) throws Exception {
         return questionnaireShareExe.shareQuestionnaire(scene, page);
+    }
+
+    @Override
+    public void exportResultByQuestionnaireCode(String questionnaireCode, HttpServletResponse response) throws Exception {
+
+        Map<String, List<List<Map<String, String>>>> questionnaireResult = questionnaireResultExe.getQuestionnaireResult(questionnaireCode);
+        questionnaireExportExe.exportQuestionnaireResult(questionnaireResult, response);
     }
 }

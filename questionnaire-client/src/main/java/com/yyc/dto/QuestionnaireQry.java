@@ -1,12 +1,18 @@
 package com.yyc.dto;
 
 import com.alibaba.cola.dto.PageQuery;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author yuchengyao
  */
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class QuestionnaireQry extends PageQuery {
 
     /**

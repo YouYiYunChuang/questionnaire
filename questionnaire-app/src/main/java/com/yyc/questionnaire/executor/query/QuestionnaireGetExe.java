@@ -1,4 +1,4 @@
-package com.yyc.questionnaire.executor;
+package com.yyc.questionnaire.executor.query;
 
 import com.yyc.domain.exception.QuestionnaireException;
 import com.yyc.domain.exception.QuestionnaireExceptionCode;
